@@ -2,31 +2,26 @@
   <div class="pa-5">
     <v-dialog v-model="dialog" width="900">
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props">
-          Open Dialog
-        </v-btn>
+        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span>New Template <v-icon class="mdi mdi-close" @click="dialog = false"></v-icon></span>
+          <span
+            >New Template
+            <v-icon class="mdi mdi-close" @click="dialog = false"></v-icon
+          ></span>
         </v-card-title>
         <v-card-text>
           <card-box class="card-box">
             <div class="name-box">
-              <span>
-                Name:
-              </span>
-              <input type="text">
-              <span>
-                Owner: <span>zubair khanzada</span>
-              </span>
+              <span> Name: </span>
+              <input type="text" />
+              <span> Owner: <span>zubair khanzada</span> </span>
             </div>
             <!-- // -->
             <div class="subject-box">
-              <span>
-                Subject:
-              </span>
-              <input type="text">
+              <span> Subject: </span>
+              <input type="text" />
               <v-menu transition="scale-transition">
                 <template v-slot:activator="{ props }">
                   <div class="menu-box" v-bind="props">
@@ -124,10 +119,60 @@
             </div>
           </card-box>
           <!-- // -->
+
+          <br />
+          <card-box class="card-box">
+            <!--  -->
+            <editor-content :editor="editor" />
+            <div v-if="editor">
+              <ul style="list-style: none">
+                <li>
+                  <button
+                    @click="editor.chain().focus().toggleBold().run()"
+                    :disabled="!editor.can().chain().focus().toggleBold().run()"
+                    :class="{ 'is-active': editor.isActive('bold') }"
+                  >
+                    bold
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="editor.chain().focus().toggleItalic().run()"
+                    :disabled="
+                      !editor.can().chain().focus().toggleItalic().run()
+                    "
+                    :class="{ 'is-active': editor.isActive('italic') }"
+                  >
+                    Italic
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="editor.chain().focus().toggleUnderline().run()"
+                    :class="{ 'is-active': editor.isActive('underline') }"
+                  >
+                    Underline
+                  </button>
+                </li>
+                <li>
+                  <button
+                    @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
+                    :class="{ 'is-active': editor.isActive('clear-formatting') }"
+                  >
+                    Clear Formatting
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <!--  -->
+          </card-box>
+
           <p>
             <v-icon class="mdi mdi-draw"></v-icon>
             Your signature will be included when you use this template.
-            <router-link>Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon></router-link>
+            <router-link
+              >Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon
+            ></router-link>
           </p>
         </v-card-text>
         <v-card-actions>
@@ -144,19 +189,39 @@
 </template>
 
 <script>
+import { Editor, EditorContent } from "@tiptap/vue-3";
+import StarterKit from "@tiptap/starter-kit";
+import Underline from '@tiptap/extension-underline'
+
+// import Underline from "@tiptap/extension-clear-formating"
 export default {
+  components: {
+    EditorContent,
+  },
   data() {
     return {
       dialog: false,
       items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" },
       ],
-    }
+      editor: null,
+    };
   },
-}
+
+  mounted() {
+    this.editor = new Editor({
+      content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
+      extensions: [StarterKit, Underline],
+    });
+  },
+
+  beforeUnmount() {
+    this.editor.destroy();
+  },
+};
 </script>
 
 <style scoped>
@@ -425,6 +490,5 @@ p router-link .v-icon {
   background-color: #fff;
   color: #ff7a53 !important;
   border: 1px solid #ff7a59;
-
 }
 </style>
