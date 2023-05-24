@@ -16,67 +16,24 @@
             :class="{ 'is-active': editor.isActive('clear-formatting') }">
             <v-icon class="mdi mdi-alpha-t"></v-icon>
         </span>
-        <v-menu transition="scale-transition">
-            <template v-slot:activator="{ props }">
-                <div class="menu-box" v-bind="props">
-                    More
-                    <v-icon class="mdi mdi-menu-down"></v-icon>
-                </div>
-            </template>
-            <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <MoreModal />
         <div class="divider"></div>
-        <v-menu transition="scale-transition">
-            <template v-slot:activator="{ props }">
-                <div class="menu-box ml-0 rotate" v-bind="props">
-                    <v-icon class="mdi mdi-link"></v-icon>
-                </div>
-            </template>
-            <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <LinkModal />
         <span>
             <v-icon class="mdi mdi-image-outline"></v-icon>
         </span>
-        <v-menu transition="scale-transition">
-            <template v-slot:activator="{ props }">
-                <div class="menu-box" v-bind="props">
-                    Personalize
-                    <v-icon class="mdi mdi-menu-down"></v-icon>
-                </div>
-            </template>
-            <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
-        <v-menu transition="scale-transition">
-            <template v-slot:activator="{ props }">
-                <div class="menu-box" v-bind="props">
-                    Insert
-                    <v-icon class="mdi mdi-menu-down"></v-icon>
-                </div>
-            </template>
-            <v-list>
-                <v-list-item v-for="(item, i) in items" :key="i">
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
-            </v-list>
-        </v-menu>
+        <PersonalizeModal />
+        <InsertModal />
     </div>
 </template>
 
 <script>
+import MoreModal from "@/editor/components/modal/MoreModal.vue"
+import LinkModal from "@/editor/components/modal/LinkModal.vue"
+import PersonalizeModal from "@/editor/components/modal/PersonalizeModal.vue"
+import InsertModal from "@/editor/components/modal/InsertModal.vue"
 export default {
-    components: {},
+    components: { MoreModal, LinkModal, PersonalizeModal, InsertModal },
     props: ['editor'],
 };
 </script>
