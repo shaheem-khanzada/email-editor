@@ -1,0 +1,19 @@
+<template>
+    <div>
+        <v-menu transition="scale-transition">
+            <template v-slot:activator="{ props }">
+                <div class="menu-box" v-bind="props">
+                    More
+                    <v-icon class="mdi mdi-menu-down"></v-icon>
+                </div>
+            </template>
+            <v-list>
+                <v-list-item>
+                    <v-list-item-title>Dummy</v-list-item-title>
+                    <v-list-item-title>Dummy</v-list-item-title>
+                    <v-list-item-title>Dummy</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+    </div>
+</template>
