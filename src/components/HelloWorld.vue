@@ -6,10 +6,8 @@
       </template>
       <v-card>
         <v-card-title>
-          <span
-            >New Template
-            <v-icon class="mdi mdi-close" @click="dialog = false"></v-icon
-          ></span>
+          <span>New Template
+            <v-icon class="mdi mdi-close" @click="dialog = false"></v-icon></span>
         </v-card-title>
         <v-card-text>
           <card-box class="card-box">
@@ -55,18 +53,24 @@
             </div>
             <!-- // -->
             <div class="draft-extend-editor">
-              <textarea class="textarea-content"></textarea>
-              <div class="draft-extend-controls">
-                <span>
+              <!-- <textarea class="textarea-content"></textarea> -->
+              <editor-content :editor="editor" />
+              <div class="draft-extend-controls" v-if="editor">
+                <span @click="editor.chain().focus().toggleBold().run()"
+                  :disabled="!editor.can().chain().focus().toggleBold().run()"
+                  :class="{ 'is-active': editor.isActive('bold') }">
                   <v-icon class="mdi mdi-alpha-b"></v-icon>
                 </span>
-                <span>
+                <span @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()
+                  " :class="{ 'is-active': editor.isActive('italic') }">
                   <v-icon class="mdi mdi-format-italic"></v-icon>
                 </span>
-                <span>
+                <span @click="editor.chain().focus().toggleUnderline().run()"
+                  :class="{ 'is-active': editor.isActive('underline') }">
                   <v-icon class="mdi mdi-format-underline"></v-icon>
                 </span>
-                <span>
+                <span @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
+                  :class="{ 'is-active': editor.isActive('clear-formatting') }">
                   <v-icon class="mdi mdi-alpha-t"></v-icon>
                 </span>
                 <v-menu transition="scale-transition">
@@ -119,60 +123,10 @@
             </div>
           </card-box>
           <!-- // -->
-
-          <br />
-          <card-box class="card-box">
-            <!--  -->
-            <editor-content :editor="editor" />
-            <div v-if="editor">
-              <ul style="list-style: none">
-                <li>
-                  <button
-                    @click="editor.chain().focus().toggleBold().run()"
-                    :disabled="!editor.can().chain().focus().toggleBold().run()"
-                    :class="{ 'is-active': editor.isActive('bold') }"
-                  >
-                    bold
-                  </button>
-                </li>
-                <li>
-                  <button
-                    @click="editor.chain().focus().toggleItalic().run()"
-                    :disabled="
-                      !editor.can().chain().focus().toggleItalic().run()
-                    "
-                    :class="{ 'is-active': editor.isActive('italic') }"
-                  >
-                    Italic
-                  </button>
-                </li>
-                <li>
-                  <button
-                    @click="editor.chain().focus().toggleUnderline().run()"
-                    :class="{ 'is-active': editor.isActive('underline') }"
-                  >
-                    Underline
-                  </button>
-                </li>
-                <li>
-                  <button
-                    @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
-                    :class="{ 'is-active': editor.isActive('clear-formatting') }"
-                  >
-                    Clear Formatting
-                  </button>
-                </li>
-              </ul>
-            </div>
-            <!--  -->
-          </card-box>
-
           <p>
             <v-icon class="mdi mdi-draw"></v-icon>
             Your signature will be included when you use this template.
-            <router-link
-              >Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon
-            ></router-link>
+            <router-link>Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon></router-link>
           </p>
         </v-card-text>
         <v-card-actions>
@@ -383,14 +337,16 @@ export default {
   padding: 12px;
 }
 
-.draft-extend-editor .textarea-content {
+.draft-extend-editor:deep(.ProseMirror) {
   width: 100%;
   resize: none;
   height: 300px;
   outline: none;
   display: block;
+  overflow: auto;
   font-size: 14px;
   color: #33475b;
+  padding: 0 0 10px 0;
   font-family: LexendDeca-Light;
 }
 
