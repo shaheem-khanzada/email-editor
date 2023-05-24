@@ -111,6 +111,7 @@ export default {
 }
 
 .menu-box .v-icon {
+    margin-top: 2px;
     color: #7c98b6;
 }
 
