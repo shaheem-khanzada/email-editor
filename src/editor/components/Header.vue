@@ -3,7 +3,7 @@
         <div class="name-box">
             <span> Name: </span>
             <input type="text" />
-            <span> Owner: <span>zubair khanzada</span> </span>
+            <span> Owner: <span>Nick&Less</span> </span>
         </div>
         <!-- // -->
         <div class="subject-box">
