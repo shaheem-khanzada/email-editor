@@ -9,24 +9,79 @@
                 variant="outlined"></v-select>
             <v-select class="size-fonts" label="" :items="[1, 2, 3, 4, 5, 6, 7, 8, 9]" variant="outlined"></v-select>
             <div class="color-menu">
-                <button>
+                <button @click="colorPickerAdd()">
                     <v-icon class="mdi mdi-format-color-text"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
-                <button>
+                <div class="color-picker-menu" :class="{ active: addColorPicker }">
+                    <v-card>
+                        <v-tabs v-model="tab">
+                            <v-tab value="one">Simple</v-tab>
+                            <v-tab value="two">Advanced</v-tab>
+                        </v-tabs>
+                        <v-card-text>
+                            <v-window v-model="tab">
+                                <v-window-item value="one">
+                                    <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2"
+                                        :swatches="swatches" show-swatches></v-color-picker>
+                                </v-window-item>
+                                <v-window-item value="two">
+                                    <v-color-picker width="100%" canvas-height="100"></v-color-picker>
+                                </v-window-item>
+                            </v-window>
+                            <div class="pt-3">
+                                <button class="reset-default">Reset to default</button>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </div>
+                <button @click="colorPickerEdit()">
                     <v-icon class="mdi mdi-format-color-highlight"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
+                <div class="color-picker-menu" :class="{ active: editColorPicker }">
+                    <v-card>
+                        <v-tabs v-model="tab">
+                            <v-tab value="one">Simple</v-tab>
+                            <v-tab value="two">Advanced</v-tab>
+                        </v-tabs>
+                        <v-card-text>
+                            <v-window v-model="tab">
+                                <v-window-item value="one">
+                                    <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2"
+                                        :swatches="swatches" show-swatches></v-color-picker>
+                                </v-window-item>
+                                <v-window-item value="two">
+                                    <v-color-picker width="100%" canvas-height="100"></v-color-picker>
+                                </v-window-item>
+                            </v-window>
+                            <div class="pt-3">
+                                <button class="reset-default">Reset to default</button>
+                            </div>
+                        </v-card-text>
+                    </v-card>
+                </div>
                 <button>
                     <v-icon class="mdi mdi-format-list-bulleted"></v-icon>
                 </button>
                 <button>
                     <v-icon class="mdi mdi-format-list-numbered"></v-icon>
                 </button>
-                <button>
+                <button @click="alignmentMenuBox()">
                     <v-icon class="mdi mdi-format-align-left"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
+                <div class="alignment-menu" :class="{ active: alignmentMenu }">
+                    <button>
+                        <v-icon class="mdi mdi-format-align-left"></v-icon>
+                    </button>
+                    <button>
+                        <v-icon class="mdi mdi-format-align-center"></v-icon>
+                    </button>
+                    <button>
+                        <v-icon class="mdi mdi-format-align-right"></v-icon>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -37,12 +92,25 @@
 export default {
     data() {
         return {
-            showMore: false
+            showMore: false,
+            addColorPicker: false,
+            editColorPicker: false,
+            alignmentMenu: false,
+            tab: null,
         };
     },
     methods: {
         myMoreMenu: function () {
             this.showMore = !this.showMore;
+        },
+        colorPickerAdd: function () {
+            this.addColorPicker = !this.addColorPicker;
+        },
+        colorPickerEdit: function () {
+            this.editColorPicker = !this.editColorPicker;
+        },
+        alignmentMenuBox: function () {
+            this.alignmentMenu = !this.alignmentMenu;
         }
     }
 };
@@ -165,4 +233,178 @@ export default {
 .color-menu button:hover {
     border-color: #cbd6e2;
 }
+
+/* //// Color Picker Menu //// */
+.color-picker-menu {
+    top: 0%;
+    z-index: 1;
+    width: 300px;
+    display: none;
+    position: absolute;
+    border-radius: 3px;
+    background: #ffffff;
+    transform: translateY(-97%);
+    border: 1px solid #cbd6e2;
+    box-shadow: 0 1px 24px 0 rgba(0, 0, 0, .08);
+}
+
+.color-picker-menu.active {
+    display: block;
+}
+
+.color-picker-menu .v-card .v-slide-group {
+    background-color: rgb(245, 248, 250);
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn {
+    border: 0;
+    width: 50%;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 0 0 0 0;
+    color: rgb(51, 71, 91);
+    text-transform: capitalize;
+    font-family: LexendDeca-Light;
+    border-bottom: 1px solid #cbd6e2;
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn.v-slide-group-item--active {
+    background: #ffffff;
+    border-color: transparent;
+    font-family: LexendDeca-Medium;
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:first-of-type.v-slide-group-item--active {
+    border-right: 1px solid #cbd6e2;
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:last-of-type.v-slide-group-item--active {
+    border-left: 1px solid #cbd6e2;
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:hover .v-btn__overlay {
+    background: none;
+}
+
+.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn.v-tab--selected .v-btn__content .v-tab__slider {
+    display: none;
+}
+
+.color-picker-menu .v-card .v-card-text {
+    padding: 16px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-color-picker__controls {
+    padding: 10px 0 0;
+}
+
+.color-picker-menu .v-card .v-card-text .v-color-picker__controls .v-color-picker-preview {
+    margin-bottom: 10px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-slider.v-input--horizontal .v-input__control {
+    min-height: 20px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-color-picker-edit__input input {
+    margin-bottom: 5px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-color-picker.v-sheet {
+    border-radius: 0;
+    box-shadow: 0 0 0 0 #cecece;
+}
+
+.color-picker-menu .v-card .v-card-text .reset-default {
+    width: 100%;
+    font-size: 12px;
+    color: #506e91;
+    line-height: 14px;
+    padding: 8px 16px;
+    background-color: #eaf0f6;
+    border: 1px solid #cbd6e2;
+    font-family: LexendDeca-Light;
+}
+
+.color-picker-menu .v-card .v-card-text .reset-default:hover {
+    background: #f5f8fa;
+}
+
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet {
+    margin: 0 !important;
+}
+
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches {
+    max-height: 216px !important;
+}
+
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches .v-color-picker-swatches__swatch .v-color-picker-swatches__color {
+    width: 25px;
+    height: 25px;
+    margin: 3px 3px;
+    max-height: 25px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches>div {
+    padding: 0;
+}
+
+/* width */
+.v-color-picker-swatches::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.v-color-picker-swatches::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.v-color-picker-swatches::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+}
+
+/* Handle on hover */
+.v-color-picker-swatches::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* //// Color Picker Menu //// */
+
+/* //// Alignment Menu //// */
+.alignment-menu {
+    top: 45px;
+    right: 3px;
+    width: 60px;
+    display: none;
+    padding: 5px 0;
+    position: absolute;
+    border-radius: 3px;
+    background-color: #fff;
+    border: 1px solid #cbd6e2;
+    box-shadow: 0 1px 24px 0 rgba(0, 0, 0, .08);
+}
+
+.alignment-menu.active {
+    display: block;
+}
+
+.alignment-menu button {
+    border: 0;
+    width: 100%;
+    min-height: 32px;
+    border-radius: 0;
+}
+
+.alignment-menu button .v-icon {
+    font-size: 18px;
+    color: #33475b;
+}
+
+.alignment-menu button:hover {
+    background: #e5f5f8;
+}
+
+/* //// Alignment Menu //// */
 </style>

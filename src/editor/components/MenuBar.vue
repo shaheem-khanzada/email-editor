@@ -1,18 +1,18 @@
 <template>
     <div class="draft-extend-controls" v-if="editor">
-        <span @click="editor.chain().focus().toggleBold().run()"
+        <span class="editor-span" @click="editor.chain().focus().toggleBold().run()"
             :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
             <v-icon class="mdi mdi-alpha-b"></v-icon>
         </span>
-        <span @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()
+        <span class="editor-span" @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()
             " :class="{ 'is-active': editor.isActive('italic') }">
             <v-icon class="mdi mdi-format-italic"></v-icon>
         </span>
-        <span @click="editor.chain().focus().toggleUnderline().run()"
+        <span class="editor-span" @click="editor.chain().focus().toggleUnderline().run()"
             :class="{ 'is-active': editor.isActive('underline') }">
             <v-icon class="mdi mdi-format-underline"></v-icon>
         </span>
-        <span @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
+        <span class="editor-span" @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
             :class="{ 'is-active': editor.isActive('clear-formatting') }">
             <v-icon class="mdi mdi-alpha-t"></v-icon>
         </span>
@@ -49,7 +49,7 @@ export default {
     align-items: center;
 }
 
-.draft-extend-controls span .v-icon {
+.draft-extend-controls .editor-span .v-icon {
     width: 24px;
     height: 26px;
     font-size: 20px;
@@ -57,7 +57,7 @@ export default {
     padding-top: 2px;
 }
 
-.draft-extend-controls span {
+.draft-extend-controls .editor-span {
     width: 26px;
     height: 26px;
     display: flex;
@@ -69,22 +69,22 @@ export default {
     border: 1px solid transparent;
 }
 
-.draft-extend-controls span.is-active {
+.draft-extend-controls .editor-span.is-active {
     background: rgb(203, 214, 226);
     border: 1px solid rgb(153, 172, 194);
     transition: all 150ms ease-out 0s;
 }
 
-.draft-extend-controls span:hover {
+.draft-extend-controls .editor-span:hover {
     border-color: #cbd6e2;
 }
 
-.draft-extend-controls span:first-of-type .v-icon {
+.draft-extend-controls .editor-span:first-of-type .v-icon {
     padding-top: 0;
     font-size: 30px;
 }
 
-.draft-extend-controls span:nth-of-type(4) .v-icon {
+.draft-extend-controls .editor-span:nth-of-type(4) .v-icon {
     font-size: 30px;
 }
 
