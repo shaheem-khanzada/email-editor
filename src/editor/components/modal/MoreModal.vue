@@ -13,54 +13,12 @@
                     <v-icon class="mdi mdi-format-color-text"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
-                <div class="color-picker-menu" :class="{ active: addColorPicker }">
-                    <v-card>
-                        <v-tabs v-model="tab">
-                            <v-tab value="one">Simple</v-tab>
-                            <v-tab value="two">Advanced</v-tab>
-                        </v-tabs>
-                        <v-card-text>
-                            <v-window v-model="tab">
-                                <v-window-item value="one">
-                                    <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2"
-                                        :swatches="swatches" show-swatches></v-color-picker>
-                                </v-window-item>
-                                <v-window-item value="two">
-                                    <v-color-picker width="100%" canvas-height="100"></v-color-picker>
-                                </v-window-item>
-                            </v-window>
-                            <div class="pt-3">
-                                <button class="reset-default">Reset to default</button>
-                            </div>
-                        </v-card-text>
-                    </v-card>
-                </div>
+                <AddColorModal :class="{ active: addColorPicker }" />
                 <button @click="colorPickerEdit()">
                     <v-icon class="mdi mdi-format-color-highlight"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
-                <div class="color-picker-menu" :class="{ active: editColorPicker }">
-                    <v-card>
-                        <v-tabs v-model="tab">
-                            <v-tab value="one">Simple</v-tab>
-                            <v-tab value="two">Advanced</v-tab>
-                        </v-tabs>
-                        <v-card-text>
-                            <v-window v-model="tab">
-                                <v-window-item value="one">
-                                    <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2"
-                                        :swatches="swatches" show-swatches></v-color-picker>
-                                </v-window-item>
-                                <v-window-item value="two">
-                                    <v-color-picker width="100%" canvas-height="100"></v-color-picker>
-                                </v-window-item>
-                            </v-window>
-                            <div class="pt-3">
-                                <button class="reset-default">Reset to default</button>
-                            </div>
-                        </v-card-text>
-                    </v-card>
-                </div>
+                <EditColorModal :class="{ active: editColorPicker }" />
                 <button>
                     <v-icon class="mdi mdi-format-list-bulleted"></v-icon>
                 </button>
@@ -71,25 +29,18 @@
                     <v-icon class="mdi mdi-format-align-left"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
-                <div class="alignment-menu" :class="{ active: alignmentMenu }">
-                    <button>
-                        <v-icon class="mdi mdi-format-align-left"></v-icon>
-                    </button>
-                    <button>
-                        <v-icon class="mdi mdi-format-align-center"></v-icon>
-                    </button>
-                    <button>
-                        <v-icon class="mdi mdi-format-align-right"></v-icon>
-                    </button>
-                </div>
+                <TextAlignModal :class="{ active: alignmentMenu }" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue"
+import EditColorModal from "@/editor/components/modal/color_modal/EditColorModal.vue"
+import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue"
 export default {
+    components: { AddColorModal, EditColorModal, TextAlignModal },
     data() {
         return {
             showMore: false,
@@ -371,40 +322,4 @@ export default {
 }
 
 /* //// Color Picker Menu //// */
-
-/* //// Alignment Menu //// */
-.alignment-menu {
-    top: 45px;
-    right: 3px;
-    width: 60px;
-    display: none;
-    padding: 5px 0;
-    position: absolute;
-    border-radius: 3px;
-    background-color: #fff;
-    border: 1px solid #cbd6e2;
-    box-shadow: 0 1px 24px 0 rgba(0, 0, 0, .08);
-}
-
-.alignment-menu.active {
-    display: block;
-}
-
-.alignment-menu button {
-    border: 0;
-    width: 100%;
-    min-height: 32px;
-    border-radius: 0;
-}
-
-.alignment-menu button .v-icon {
-    font-size: 18px;
-    color: #33475b;
-}
-
-.alignment-menu button:hover {
-    background: #e5f5f8;
-}
-
-/* //// Alignment Menu //// */
 </style>
