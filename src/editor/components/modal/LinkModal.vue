@@ -2,8 +2,9 @@
     <div>
         <v-menu transition="scale-transition">
             <template v-slot:activator="{ props }">
-                <div class="menu-box ml-0 rotate" v-bind="props">
+                <div class="menu-box ml-0 rotate mr-1" v-bind="props">
                     <v-icon class="mdi mdi-link"></v-icon>
+                    <v-tooltip activator="parent" location="top">Insert link</v-tooltip>
                 </div>
             </template>
             <v-list>

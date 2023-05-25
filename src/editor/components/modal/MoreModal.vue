@@ -5,9 +5,11 @@
             <v-icon class="mdi mdi-menu-down"></v-icon>
         </div>
         <div class="more-menu-wrapper" :class="{ active: showMore }">
-            <v-select class="fonts" label="" :items="['Sans Serif', 'Serif', 'Monospace', 'Georgia', 'Tahoma', 'Verdana']"
+            <v-select class="fonts" label="" placeholder="Sans Serif"
+                :items="['Sans Serif', 'Serif', 'Monospace', 'Georgia', 'Tahoma', 'Verdana']" variant="outlined">
+            </v-select>
+            <v-select class="size-fonts" label="" placeholder="12" :items="[1, 2, 3, 4, 5, 6, 7, 8, 9]"
                 variant="outlined"></v-select>
-            <v-select class="size-fonts" label="" :items="[1, 2, 3, 4, 5, 6, 7, 8, 9]" variant="outlined"></v-select>
             <div class="color-menu">
                 <button @click="colorPickerAdd()">
                     <v-icon class="mdi mdi-format-color-text"></v-icon>
@@ -18,16 +20,19 @@
                     <v-icon class="mdi mdi-format-color-highlight"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
-                <EditColorModal :class="{ active: editColorPicker }" />
+                <AddColorModal :class="{ active: addColorPicker }" />
                 <button>
                     <v-icon class="mdi mdi-format-list-bulleted"></v-icon>
+                    <v-tooltip activator="parent" location="top">Unordered list</v-tooltip>
                 </button>
                 <button>
                     <v-icon class="mdi mdi-format-list-numbered"></v-icon>
+                    <v-tooltip activator="parent" location="top">Ordered list</v-tooltip>
                 </button>
                 <button @click="alignmentMenuBox()">
                     <v-icon class="mdi mdi-format-align-left"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
+                    <v-tooltip activator="parent" location="top">Align</v-tooltip>
                 </button>
                 <TextAlignModal :class="{ active: alignmentMenu }" />
             </div>
@@ -37,15 +42,13 @@
 
 <script>
 import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue"
-import EditColorModal from "@/editor/components/modal/color_modal/EditColorModal.vue"
 import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue"
 export default {
-    components: { AddColorModal, EditColorModal, TextAlignModal },
+    components: { AddColorModal, TextAlignModal },
     data() {
         return {
             showMore: false,
             addColorPicker: false,
-            editColorPicker: false,
             alignmentMenu: false,
             tab: null,
         };
@@ -56,9 +59,6 @@ export default {
         },
         colorPickerAdd: function () {
             this.addColorPicker = !this.addColorPicker;
-        },
-        colorPickerEdit: function () {
-            this.editColorPicker = !this.editColorPicker;
         },
         alignmentMenuBox: function () {
             this.alignmentMenu = !this.alignmentMenu;
@@ -185,141 +185,12 @@ export default {
     border-color: #cbd6e2;
 }
 
-/* //// Color Picker Menu //// */
-.color-picker-menu {
-    top: 0%;
-    z-index: 1;
-    width: 300px;
-    display: none;
-    position: absolute;
-    border-radius: 3px;
-    background: #ffffff;
-    transform: translateY(-97%);
-    border: 1px solid #cbd6e2;
-    box-shadow: 0 1px 24px 0 rgba(0, 0, 0, .08);
-}
-
-.color-picker-menu.active {
-    display: block;
-}
-
-.color-picker-menu .v-card .v-slide-group {
-    background-color: rgb(245, 248, 250);
-}
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn {
-    border: 0;
-    width: 50%;
+.more-menu-wrapper .v-input .v-field .v-field__input input::placeholder {
+    top: -2px;
+    opacity: 1;
     font-size: 14px;
-    text-align: center;
-    border-radius: 0 0 0 0;
-    color: rgb(51, 71, 91);
-    text-transform: capitalize;
-    font-family: LexendDeca-Light;
-    border-bottom: 1px solid #cbd6e2;
+    position: relative;
+    padding: 0 0 0 10px;
+    color: #506e91 !important;
 }
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn.v-slide-group-item--active {
-    background: #ffffff;
-    border-color: transparent;
-    font-family: LexendDeca-Medium;
-}
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:first-of-type.v-slide-group-item--active {
-    border-right: 1px solid #cbd6e2;
-}
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:last-of-type.v-slide-group-item--active {
-    border-left: 1px solid #cbd6e2;
-}
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn:hover .v-btn__overlay {
-    background: none;
-}
-
-.color-picker-menu .v-card .v-slide-group .v-slide-group__container .v-btn.v-tab--selected .v-btn__content .v-tab__slider {
-    display: none;
-}
-
-.color-picker-menu .v-card .v-card-text {
-    padding: 16px;
-}
-
-.color-picker-menu .v-card .v-card-text .v-color-picker__controls {
-    padding: 10px 0 0;
-}
-
-.color-picker-menu .v-card .v-card-text .v-color-picker__controls .v-color-picker-preview {
-    margin-bottom: 10px;
-}
-
-.color-picker-menu .v-card .v-card-text .v-slider.v-input--horizontal .v-input__control {
-    min-height: 20px;
-}
-
-.color-picker-menu .v-card .v-card-text .v-color-picker-edit__input input {
-    margin-bottom: 5px;
-}
-
-.color-picker-menu .v-card .v-card-text .v-color-picker.v-sheet {
-    border-radius: 0;
-    box-shadow: 0 0 0 0 #cecece;
-}
-
-.color-picker-menu .v-card .v-card-text .reset-default {
-    width: 100%;
-    font-size: 12px;
-    color: #506e91;
-    line-height: 14px;
-    padding: 8px 16px;
-    background-color: #eaf0f6;
-    border: 1px solid #cbd6e2;
-    font-family: LexendDeca-Light;
-}
-
-.color-picker-menu .v-card .v-card-text .reset-default:hover {
-    background: #f5f8fa;
-}
-
-.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet {
-    margin: 0 !important;
-}
-
-.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches {
-    max-height: 216px !important;
-}
-
-.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches .v-color-picker-swatches__swatch .v-color-picker-swatches__color {
-    width: 25px;
-    height: 25px;
-    margin: 3px 3px;
-    max-height: 25px;
-}
-
-.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches>div {
-    padding: 0;
-}
-
-/* width */
-.v-color-picker-swatches::-webkit-scrollbar {
-    width: 8px;
-}
-
-/* Track */
-.v-color-picker-swatches::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-.v-color-picker-swatches::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 15px;
-}
-
-/* Handle on hover */
-.v-color-picker-swatches::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-/* //// Color Picker Menu //// */
 </style>

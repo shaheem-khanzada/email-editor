@@ -3,24 +3,29 @@
         <span class="editor-span" @click="editor.chain().focus().toggleBold().run()"
             :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
             <v-icon class="mdi mdi-alpha-b"></v-icon>
+            <v-tooltip activator="parent" location="top">Bold</v-tooltip>
         </span>
         <span class="editor-span" @click="editor.chain().focus().toggleItalic().run()" :disabled="!editor.can().chain().focus().toggleItalic().run()
             " :class="{ 'is-active': editor.isActive('italic') }">
             <v-icon class="mdi mdi-format-italic"></v-icon>
+            <v-tooltip activator="parent" location="top">Italic</v-tooltip>
         </span>
         <span class="editor-span" @click="editor.chain().focus().toggleUnderline().run()"
             :class="{ 'is-active': editor.isActive('underline') }">
             <v-icon class="mdi mdi-format-underline"></v-icon>
+            <v-tooltip activator="parent" location="top">Underline</v-tooltip>
         </span>
         <span class="editor-span" @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
             :class="{ 'is-active': editor.isActive('clear-formatting') }">
             <v-icon class="mdi mdi-alpha-t"></v-icon>
+            <v-tooltip activator="parent" location="top">Clear formatting</v-tooltip>
         </span>
         <MoreModal />
         <div class="divider"></div>
         <LinkModal />
-        <span>
+        <span class="editor-span">
             <v-icon class="mdi mdi-image-outline"></v-icon>
+            <v-tooltip activator="parent" location="top">Insert image</v-tooltip>
         </span>
         <PersonalizeModal />
         <InsertModal />
@@ -123,4 +128,34 @@ export default {
 .menu-box:last-of-type {
     margin-right: 0;
 }
+
+/* //// Tooltip //// */
+.v-overlay-container .v-overlay .v-overlay__content {
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 3px;
+    background: #425b76;
+    padding: 6px 10px 4px;
+}
+
+.v-overlay-container .v-overlay .v-overlay__content::before {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    clip-path: polygon(100% 100%, 0px 100%, 100% 0px);
+    border-top-left-radius: 100%;
+    border-bottom-right-radius: 3px;
+    width: 16px;
+    height: 16px;
+    background-color: inherit;
+    transform: rotate(45deg);
+    top: calc(100% - 10px);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+}
+
+/* //// Tooltip //// */
 </style>

@@ -3,17 +3,17 @@
         <div>
             <v-card class="box-shadow-none">
                 <v-card-text>
-                    <card-box class="card-box">
+                    <div class="card-box">
                         <Header />
                         <div class="draft-extend-editor">
                             <editor-content :editor="editor" />
                             <MenuBar :editor="editor" />
                         </div>
-                    </card-box>
+                    </div>
                     <p>
                         <v-icon class="mdi mdi-draw"></v-icon>
                         Your signature will be included when you use this template.
-                        <router-link>Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon></router-link>
+                        <a>Edit signature <v-icon class="mdi mdi-open-in-new"></v-icon></a>
                     </p>
                 </v-card-text>
             </v-card>
@@ -170,12 +170,13 @@ p .v-icon {
     font-size: 20px;
 }
 
-p router-link {
+p a {
+    cursor: pointer;
     color: #0091ae;
     font-family: LexendDeca-SemiBold;
 }
 
-p router-link .v-icon {
+p a .v-icon {
     font-size: 18px;
     color: #7c98b6;
 }
