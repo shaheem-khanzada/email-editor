@@ -17,7 +17,7 @@
         </span>
         <span class="editor-span" @click="editor.chain().focus().clearNodes().unsetAllMarks().run()"
             :class="{ 'is-active': editor.isActive('clear-formatting') }">
-            <v-icon class="mdi mdi-alpha-t"></v-icon>
+            <v-icon class="mdi mdi-signature-text"></v-icon>
             <v-tooltip activator="parent" location="top">Clear formatting</v-tooltip>
         </span>
         <MoreModal />
@@ -90,7 +90,8 @@ export default {
 }
 
 .draft-extend-controls .editor-span:nth-of-type(4) .v-icon {
-    font-size: 30px;
+    padding-top: 0;
+    font-size: 18px;
 }
 
 .draft-extend-controls .menu-box {
@@ -130,7 +131,11 @@ export default {
 }
 
 /* //// Tooltip //// */
-.v-overlay-container .v-overlay .v-overlay__content {
+.v-overlay-container .v-overlay.v-tooltip {
+    z-index: inherit !important;
+}
+
+.v-overlay-container .v-overlay.v-tooltip .v-overlay__content {
     font-size: 14px;
     color: #ffffff;
     border-radius: 3px;
@@ -138,7 +143,7 @@ export default {
     padding: 6px 10px 4px;
 }
 
-.v-overlay-container .v-overlay .v-overlay__content::before {
+.v-overlay-container .v-overlay.v-tooltip .v-overlay__content::before {
     content: "";
     position: absolute;
     pointer-events: none;

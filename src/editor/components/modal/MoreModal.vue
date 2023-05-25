@@ -6,14 +6,21 @@ const editorStore = useEditorStore();
 <template>
     <div class="position-relative">
         <div class="menu-box" @click="myMoreMenu()">
-            More
+            <span class="btn-text">More</span>
             <v-icon class="mdi mdi-menu-down"></v-icon>
         </div>
         <div class="more-menu-wrapper" :class="{ active: showMore }">
-            <v-select class="fonts" label="" placeholder="Sans Serif" :items="editorStore.fontFamilies" variant="outlined">
-            </v-select>
-            <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes"
-                variant="outlined"></v-select>
+            <div class="mr-2">
+                <v-select class="fonts" label="" placeholder="Sans Serif" :items="editorStore.fontFamilies"
+                    variant="outlined">
+                </v-select>
+                <v-tooltip activator="parent" location="top">Font</v-tooltip>
+            </div>
+            <div class="mr-2">
+                <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes"
+                    variant="outlined"></v-select>
+                <v-tooltip activator="parent" location="top">Size</v-tooltip>
+            </div>
             <div class="color-menu">
                 <button @click="colorPickerAdd()">
                     <v-icon class="mdi mdi-format-color-text"></v-icon>
@@ -92,6 +99,7 @@ export default {
 
 .more-menu-wrapper.active {
     display: flex;
+    animation: fadeInUp 0.2s;
 }
 
 .more-menu-wrapper::before {
@@ -131,14 +139,12 @@ export default {
     width: 135px;
     min-width: 135px;
     max-width: 135px;
-    margin-right: 8px;
 }
 
 .size-fonts {
     width: 70px;
     min-width: 70px;
     max-width: 70px;
-    margin-right: 8px;
 }
 
 .more-menu-wrapper .v-input .v-input__details {
@@ -187,6 +193,12 @@ export default {
     border: 1px solid transparent;
 }
 
+.color-menu button.is-active {
+    background: rgb(203, 214, 226);
+    border: 1px solid rgb(153, 172, 194);
+    transition: all 150ms ease-out 0s;
+}
+
 .color-menu button:hover {
     border-color: #cbd6e2;
 }
@@ -198,5 +210,20 @@ export default {
     position: relative;
     padding: 0 0 0 10px;
     color: #506e91 !important;
+}
+
+.menu-box:hover .btn-text {
+    color: #007a8c;
+    text-decoration: underline;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
 }
 </style>

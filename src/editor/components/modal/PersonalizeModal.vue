@@ -3,7 +3,7 @@
         <v-menu transition="scale-transition">
             <template v-slot:activator="{ props }">
                 <div class="menu-box" v-bind="props">
-                    Personalize
+                    <span class="btn-text">Personalize</span>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </div>
             </template>
@@ -18,4 +18,9 @@
 
 <script></script>
 
-<style></style>
+<style>
+.menu-box:hover .btn-text {
+    color: #007a8c;
+    text-decoration: underline;
+}
+</style>
