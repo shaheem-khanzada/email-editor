@@ -1,3 +1,8 @@
+<script setup>
+import { useEditorStore } from "@/editor/store/EditorStore";
+const editorStore = useEditorStore();
+</script >
+
 <template>
     <div class="position-relative">
         <div class="menu-box" @click="myMoreMenu()">
@@ -5,10 +10,9 @@
             <v-icon class="mdi mdi-menu-down"></v-icon>
         </div>
         <div class="more-menu-wrapper" :class="{ active: showMore }">
-            <v-select class="fonts" label="" placeholder="Sans Serif"
-                :items="['Sans Serif', 'Serif', 'Monospace', 'Georgia', 'Tahoma', 'Verdana']" variant="outlined">
+            <v-select class="fonts" label="" placeholder="Sans Serif" :items="editorStore.fontFamilies" variant="outlined">
             </v-select>
-            <v-select class="size-fonts" label="" placeholder="12" :items="[1, 2, 3, 4, 5, 6, 7, 8, 9]"
+            <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes"
                 variant="outlined"></v-select>
             <div class="color-menu">
                 <button @click="colorPickerAdd()">
@@ -16,7 +20,7 @@
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
                 <AddColorModal :class="{ active: addColorPicker }" />
-                <button @click="colorPickerEdit()">
+                <button @click="colorPickerAdd()">
                     <v-icon class="mdi mdi-format-color-highlight"></v-icon>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
                 </button>
@@ -38,11 +42,13 @@
             </div>
         </div>
     </div>
-</template>
+</template >
 
 <script>
-import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue"
-import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue"
+
+import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue";
+import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue";
+
 export default {
     components: { AddColorModal, TextAlignModal },
     data() {
