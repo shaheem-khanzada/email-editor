@@ -148,7 +148,7 @@ export default {
 .draft-extend-editor .ProseMirror {
     width: 100%;
     resize: none;
-    height: 300px;
+    height: 340px;
     outline: none;
     display: block;
     overflow: auto;
