@@ -13,12 +13,22 @@ const editorStore = useEditorStore();
             <div class="mr-2">
                 <v-select class="fonts" label="" placeholder="Sans Serif" :items="editorStore.fontFamilies"
                     variant="outlined">
+                    <template v-slot:item="{ item }">
+                        <v-btn variant="text">
+                            {{ item.title }}
+                        </v-btn>
+                    </template>
                 </v-select>
                 <v-tooltip activator="parent" location="top">Font</v-tooltip>
             </div>
             <div class="mr-2">
-                <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes"
-                    variant="outlined"></v-select>
+                <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes" variant="outlined">
+                    <template v-slot:item="{ item }">
+                        <v-btn variant="text">
+                            {{ item.title }}
+                        </v-btn>
+                    </template>
+                </v-select>
                 <v-tooltip activator="parent" location="top">Size</v-tooltip>
             </div>
             <div class="color-menu">
