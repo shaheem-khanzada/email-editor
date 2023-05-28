@@ -8,10 +8,12 @@
             <v-card-text>
                 <v-window v-model="tab">
                     <v-window-item value="one">
-                        <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2" :swatches="store.colors"
-                            show-swatches>
-                            
-                        </v-color-picker>
+                        <!-- <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2"
+                            :swatches="store.colors" show-swatches>
+                        </v-color-picker> -->
+                        <div class="custom-color-boxes">
+                            <div v-for="n in 100" :key="n" style="background: green;"></div>
+                        </div>
                     </v-window-item>
                     <v-window-item value="two">
                         <v-color-picker width="100%" canvas-height="100"></v-color-picker>
@@ -93,7 +95,7 @@ const tab = ref(null);
 }
 
 .color-picker-menu .v-card .v-card-text {
-    padding: 16px;
+    padding: 16px 12px;
 }
 
 .color-picker-menu .v-card .v-card-text .v-color-picker__controls {
@@ -147,7 +149,7 @@ const tab = ref(null);
     max-height: 25px;
 }
 
-.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches .v-color-picker-swatches__swatch .v-color-picker-swatches__color > div {
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches .v-color-picker-swatches__swatch .v-color-picker-swatches__color>div {
     border-width: 1px;
     border-color: rgba(0, 0, 0, 0.2);
     border-radius: inherit;
@@ -180,4 +182,56 @@ const tab = ref(null);
 }
 
 /* //// Color Picker Menu //// */
+
+/* /// Custom Color Boxes /// */
+.custom-color-boxes {
+    overflow: auto;
+    min-height: 217px;
+    max-height: 217px;
+}
+
+/* width */
+.custom-color-boxes::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.custom-color-boxes::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.custom-color-boxes::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+}
+
+/* Handle on hover */
+.custom-color-boxes::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.custom-color-boxes div {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 2px;
+    margin: 0 4px 0 4px;
+    display: inline-block;
+}
+
+.custom-color-boxes div.selected::before {
+    top: 3px;
+    left: 5px;
+    content: "\F05E0";
+    position: absolute;
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 </style>

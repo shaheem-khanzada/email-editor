@@ -6,14 +6,18 @@ import { ref } from "vue";
 
 const store = useEditorStore();
 
-const showMore = ref(false);
+// const showMore = ref(false);
 const addColorPicker = ref(false);
 const alignmentMenu = ref(false);
 
+// const fav = ref(true);
+const menu = ref(false);
+// const message = ref(false);
+// const hints = ref(true);
 
-const myMoreMenu = () => {
-    showMore.value = !showMore.value;
-}
+// const myMoreMenu = () => {
+//     showMore.value = !showMore.value;
+// }
 const colorPickerAdd = () => {
     addColorPicker.value = !addColorPicker.value;
 }
@@ -25,73 +29,72 @@ const alignmentMenuBox = () => {
 
 <template>
     <div class="position-relative">
-        <div class="menu-box" @click="myMoreMenu()">
-            <span class="btn-text">More</span>
-            <v-icon class="mdi mdi-menu-down"></v-icon>
-        </div>
-        <div class="more-menu-wrapper" :class="{ active: showMore }">
-            <div class="mr-2">
-                <v-select @update:modelValue="store.updateFontFamily" :model-value="store.activeFontFamily" class="fonts" label=""
-                    placeholder="Sans Serif" :items="store.fontFamilies" v-modal="store.selectedFontFamily"
-                    variant="outlined">
-                </v-select>
-                <v-tooltip activator="parent" location="top">Font</v-tooltip>
-            </div>
-            <div class="mr-2">
-                <v-select class="size-fonts" label="" placeholder="12" :items="store.fontSizes" variant="outlined"
-                    v-modal="store.selectedFontSize">
-                </v-select>
-                <v-tooltip activator="parent" location="top">Size</v-tooltip>
-            </div>
-            <div class="color-menu">
-                <button @click="colorPickerAdd()">
-                    <v-icon class="mdi mdi-format-color-text"></v-icon>
+        <v-menu v-model="menu" :close-on-content-click="false" location="top">
+            <template v-slot:activator="{ props }">
+                <div class="menu-box" v-bind="props">
+                    <span class="btn-text">More</span>
                     <v-icon class="mdi mdi-menu-down"></v-icon>
-                </button>
-                <AddColorModal :class="{ active: addColorPicker }" />
-                <button @click="colorPickerAdd()">
-                    <v-icon class="mdi mdi-format-color-highlight"></v-icon>
-                    <v-icon class="mdi mdi-menu-down"></v-icon>
-                </button>
-                <AddColorModal :class="{ active: addColorPicker }" />
-                <button>
-                    <v-icon class="mdi mdi-format-list-bulleted"></v-icon>
-                    <v-tooltip activator="parent" location="top">Unordered list</v-tooltip>
-                </button>
-                <button>
-                    <v-icon class="mdi mdi-format-list-numbered"></v-icon>
-                    <v-tooltip activator="parent" location="top">Ordered list</v-tooltip>
-                </button>
-                <button @click="alignmentMenuBox()">
-                    <v-icon class="mdi mdi-format-align-left"></v-icon>
-                    <v-icon class="mdi mdi-menu-down"></v-icon>
-                    <v-tooltip activator="parent" location="top">Align</v-tooltip>
-                </button>
-                <TextAlignModal :class="{ active: alignmentMenu }" />
+                </div>
+            </template>
+            <div class="more-menu-wrapper">
+                <div class="mr-2">
+                    <v-select @update:modelValue="store.updateFontFamily" :model-value="store.activeFontFamily"
+                        class="fonts" label="" placeholder="Sans Serif" :items="store.fontFamilies"
+                        v-modal="store.selectedFontFamily" variant="outlined">
+                    </v-select>
+                    <v-tooltip activator="parent" location="top">Font</v-tooltip>
+                </div>
+                <div class="mr-2">
+                    <v-select class="size-fonts" label="" placeholder="12" :items="store.fontSizes" variant="outlined"
+                        v-modal="store.selectedFontSize">
+                    </v-select>
+                    <v-tooltip activator="parent" location="top">Size</v-tooltip>
+                </div>
+                <div class="color-menu">
+                    <button @click="colorPickerAdd()">
+                        <v-icon class="mdi mdi-format-color-text"></v-icon>
+                        <v-icon class="mdi mdi-menu-down"></v-icon>
+                    </button>
+                    <AddColorModal :class="{ active: addColorPicker }" />
+                    <button @click="colorPickerAdd()">
+                        <v-icon class="mdi mdi-format-color-highlight"></v-icon>
+                        <v-icon class="mdi mdi-menu-down"></v-icon>
+                    </button>
+                    <AddColorModal :class="{ active: addColorPicker }" />
+                    <button>
+                        <v-icon class="mdi mdi-format-list-bulleted"></v-icon>
+                        <v-tooltip activator="parent" location="top">Unordered list</v-tooltip>
+                    </button>
+                    <button>
+                        <v-icon class="mdi mdi-format-list-numbered"></v-icon>
+                        <v-tooltip activator="parent" location="top">Ordered list</v-tooltip>
+                    </button>
+                    <button @click="alignmentMenuBox()">
+                        <v-icon class="mdi mdi-format-align-left"></v-icon>
+                        <v-icon class="mdi mdi-menu-down"></v-icon>
+                        <v-tooltip activator="parent" location="top">Align</v-tooltip>
+                    </button>
+                    <TextAlignModal :class="{ active: alignmentMenu }" />
+                </div>
             </div>
-        </div>
+        </v-menu>
     </div>
 </template >
 
 <style>
 .more-menu-wrapper {
-    left: 10px;
+    left: 0;
     top: -70px;
     z-index: 1;
     padding: 8px;
-    display: none;
-    min-width: 460px;
+    display: flex;
+    min-width: 481px;
     position: absolute;
     border-radius: 3px;
     align-items: center;
     background-color: #fff;
     border: 1px solid #cbd6e2;
     box-shadow: 0 1px 24px 0 rgba(0, 0, 0, .08);
-}
-
-.more-menu-wrapper.active {
-    display: flex;
-    animation: fadeInUp 0.2s;
 }
 
 .more-menu-wrapper::before {
@@ -162,9 +165,14 @@ const alignmentMenuBox = () => {
     border: 0;
     width: 100%;
     height: auto;
+    display: block;
     font-size: 14px;
+    min-width: 90px;
+    max-width: 90px;
     text-align: left;
-    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .more-menu-wrapper .v-input .v-field .v-label {
@@ -207,15 +215,5 @@ const alignmentMenuBox = () => {
 .menu-box:hover .btn-text {
     color: #007a8c;
     text-decoration: underline;
-}
-
-@keyframes fadeInUp {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
 }
 </style>

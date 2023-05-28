@@ -131,9 +131,6 @@ const props = defineProps(['editor']);
 }
 
 /* //// Tooltip //// */
-.v-overlay-container .v-overlay.v-tooltip {
-    z-index: inherit !important;
-}
 
 .v-overlay-container .v-overlay.v-tooltip .v-overlay__content {
     font-size: 14px;
