@@ -8,8 +8,10 @@
             <v-card-text>
                 <v-window v-model="tab">
                     <v-window-item value="one">
-                        <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2" :swatches="swatches"
-                            show-swatches></v-color-picker>
+                        <v-color-picker width="100%" hide-canvas hide-sliders hide-inputs class="ma-2" :swatches="store.colors"
+                            show-swatches>
+                            
+                        </v-color-picker>
                     </v-window-item>
                     <v-window-item value="two">
                         <v-color-picker width="100%" canvas-height="100"></v-color-picker>
@@ -23,15 +25,13 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { useEditorStore } from "@/editor/store/EditorStore";
+import { ref } from "vue";
 
-export default {
-    data() {
-        return {
-            tab: null,
-        };
-    },
-};
+const store = useEditorStore();
+
+const tab = ref(null);
 
 </script>
 
@@ -145,6 +145,13 @@ export default {
     height: 25px;
     margin: 3px 3px;
     max-height: 25px;
+}
+
+.color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches .v-color-picker-swatches__swatch .v-color-picker-swatches__color > div {
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: inherit;
+    border-style: solid;
 }
 
 .color-picker-menu .v-card .v-card-text .v-window-item .v-sheet .v-color-picker-swatches>div {

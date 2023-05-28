@@ -32,15 +32,15 @@
     </div>
 </template>
 
-<script>
-import MoreModal from "@/editor/components/modal/MoreModal.vue"
-import LinkModal from "@/editor/components/modal/LinkModal.vue"
-import PersonalizeModal from "@/editor/components/modal/PersonalizeModal.vue"
-import InsertModal from "@/editor/components/modal/InsertModal.vue"
-export default {
-    components: { MoreModal, LinkModal, PersonalizeModal, InsertModal },
-    props: ['editor'],
-};
+<script setup>
+import MoreModal from "@/editor/components/modal/MoreModal.vue";
+import LinkModal from "@/editor/components/modal/LinkModal.vue";
+import PersonalizeModal from "@/editor/components/modal/PersonalizeModal.vue";
+import InsertModal from "@/editor/components/modal/InsertModal.vue";
+
+// Declare props
+const props = defineProps(['editor']);
+
 </script>
 
 <style>

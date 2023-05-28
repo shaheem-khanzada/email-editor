@@ -6,8 +6,8 @@
                     <div class="card-box">
                         <Header />
                         <div class="draft-extend-editor">
-                            <editor-content :editor="editor" />
-                            <MenuBar :editor="editor" />
+                            <editor-content :editor="store.editor" />
+                            <MenuBar :editor="store.editor" />
                         </div>
                     </div>
                     <p>
@@ -20,46 +20,27 @@
         </div>
     </div>
 </template>
-  
-<script>
+
+<script setup>
 import Header from "@/editor/components/Header.vue";
 import MenuBar from "@/editor/components/MenuBar.vue"
-import { Editor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
-import Underline from '@tiptap/extension-underline'
+import { EditorContent } from "@tiptap/vue-3";
+import { onMounted, onBeforeUnmount } from "vue";
+import { useEditorStore } from "@/editor/store/EditorStore";
 
-// import Underline from "@tiptap/extension-clear-formating"
-export default {
-    components: {
-        EditorContent,
-        Header,
-        MenuBar
-    },
-    data() {
-        return {
-            dialog: false,
-            items: [
-                { title: "Click Me" },
-                { title: "Click Me" },
-                { title: "Click Me" },
-                { title: "Click Me 2" },
-            ],
-            editor: null,
-        };
-    },
 
-    mounted() {
-        this.editor = new Editor({
-            content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
-            extensions: [StarterKit, Underline],
-        });
-    },
+const store = useEditorStore()
 
-    beforeUnmount() {
-        this.editor.destroy();
-    },
-};
+onMounted(() => {
+    store.initlizeEditor();
+})
+
+onBeforeUnmount(() => {
+    store.editor.destroy();
+})
+
 </script>
+
   
 <style>
 /* /// Fonts /// */

@@ -1,6 +1,26 @@
 <script setup>
+import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue";
+import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue";
 import { useEditorStore } from "@/editor/store/EditorStore";
-const editorStore = useEditorStore();
+import { ref } from "vue";
+
+const store = useEditorStore();
+
+const showMore = ref(false);
+const addColorPicker = ref(false);
+const alignmentMenu = ref(false);
+
+
+const myMoreMenu = () => {
+    showMore.value = !showMore.value;
+}
+const colorPickerAdd = () => {
+    addColorPicker.value = !addColorPicker.value;
+}
+const alignmentMenuBox = () => {
+    alignmentMenu.value = !alignmentMenu.value;
+}
+
 </script >
 
 <template>
@@ -11,23 +31,15 @@ const editorStore = useEditorStore();
         </div>
         <div class="more-menu-wrapper" :class="{ active: showMore }">
             <div class="mr-2">
-                <v-select class="fonts" label="" placeholder="Sans Serif" :items="editorStore.fontFamilies"
+                <v-select @update:modelValue="store.updateFontFamily" :model-value="store.activeFontFamily" class="fonts" label=""
+                    placeholder="Sans Serif" :items="store.fontFamilies" v-modal="store.selectedFontFamily"
                     variant="outlined">
-                    <template v-slot:item="{ item }">
-                        <v-btn variant="text">
-                            {{ item.title }}
-                        </v-btn>
-                    </template>
                 </v-select>
                 <v-tooltip activator="parent" location="top">Font</v-tooltip>
             </div>
             <div class="mr-2">
-                <v-select class="size-fonts" label="" placeholder="12" :items="editorStore.fontSizes" variant="outlined">
-                    <template v-slot:item="{ item }">
-                        <v-btn variant="text">
-                            {{ item.title }}
-                        </v-btn>
-                    </template>
+                <v-select class="size-fonts" label="" placeholder="12" :items="store.fontSizes" variant="outlined"
+                    v-modal="store.selectedFontSize">
                 </v-select>
                 <v-tooltip activator="parent" location="top">Size</v-tooltip>
             </div>
@@ -60,36 +72,6 @@ const editorStore = useEditorStore();
         </div>
     </div>
 </template >
-
-<script>
-
-import AddColorModal from "@/editor/components/modal/color_modal/AddColorModal.vue";
-import TextAlignModal from "@/editor/components/modal/color_modal/TextAlignModal.vue";
-
-export default {
-    components: { AddColorModal, TextAlignModal },
-    data() {
-        return {
-            showMore: false,
-            addColorPicker: false,
-            alignmentMenu: false,
-            tab: null,
-        };
-    },
-    methods: {
-        myMoreMenu: function () {
-            this.showMore = !this.showMore;
-        },
-        colorPickerAdd: function () {
-            this.addColorPicker = !this.addColorPicker;
-        },
-        alignmentMenuBox: function () {
-            this.alignmentMenu = !this.alignmentMenu;
-        }
-    }
-};
-
-</script>
 
 <style>
 .more-menu-wrapper {
