@@ -45,8 +45,9 @@ const alignmentMenuBox = () => {
                     <v-tooltip activator="parent" location="top">Font</v-tooltip>
                 </div>
                 <div class="mr-2">
-                    <v-select class="size-fonts" label="" placeholder="12" :items="store.fontSizes" variant="outlined"
-                        v-modal="store.selectedFontSize">
+                    <v-select @update:modelValue="store.updateFontSize" :model-value="store.activeFontSize"
+                        class="size-fonts" label="" placeholder="8" :items="store.fontSizes"
+                        v-modal="store.selectedFontSize" variant="outlined">
                     </v-select>
                     <v-tooltip activator="parent" location="top">Size</v-tooltip>
                 </div>

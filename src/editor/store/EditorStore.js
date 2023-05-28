@@ -5,6 +5,7 @@ import Underline from '@tiptap/extension-underline'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
 import { fontSizes, fontFamilies, colors, switches } from '../data'
+import { FontSize } from '../extensions/FontSize';
 
 
 export const useEditorStore = defineStore('editor-store', {
@@ -28,7 +29,8 @@ export const useEditorStore = defineStore('editor-store', {
         },
         activeFontSize: (state) => {
             for (const fontSize of state.fontSizes) {
-                if (state.editor.isActive('textStyle', { fontSize })) {
+                if (state.editor.isActive('textStyle', { fontSize: fontSize + "px"  })) {
+                    console.log(' active font size is ', fontSize);
                     return fontSize;
                 }
             }
@@ -39,14 +41,17 @@ export const useEditorStore = defineStore('editor-store', {
         initlizeEditor() {
             this.editor = new Editor({
                 content: "<p>I’m running Tiptap with Vue.js. 🎉</p>",
-                extensions: [StarterKit, Underline, TextStyle, FontFamily],
+                extensions: [StarterKit, Underline, TextStyle, FontFamily, FontSize],
             });
-
-            console.log('this.editor', this.editor )
         },
 
-        updateFontFamily(value) {
-            this.editor.chain().focus().setFontFamily(value).run()
+        updateFontFamily(fontFamily) {
+            this.editor.chain().focus().setFontFamily(fontFamily).run()
+        },
+        updateFontSize(size) {
+            console.log("size", size);
+            console.log("selectedFontSize", this.selectedFontSize);
+            this.editor.chain().focus().setFontSize(size).run();
         }
     },
 })

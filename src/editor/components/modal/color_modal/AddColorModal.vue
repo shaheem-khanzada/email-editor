@@ -12,7 +12,7 @@
                             :swatches="store.colors" show-swatches>
                         </v-color-picker> -->
                         <div class="custom-color-boxes">
-                            <div v-for="n in 100" :key="n" style="background: green;"></div>
+                            <div v-for="color in store.switches" :key="color" :style="{ background: color }"></div>
                         </div>
                     </v-window-item>
                     <v-window-item value="two">
