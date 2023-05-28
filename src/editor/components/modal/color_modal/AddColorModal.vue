@@ -219,6 +219,7 @@ const tab = ref(null);
     border-radius: 2px;
     margin: 0 4px 0 4px;
     display: inline-block;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .custom-color-boxes div.selected::before {
