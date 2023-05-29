@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-menu class="personalize-modal" v-model="menu" :close-on-content-click="false" location="top">
+        <v-menu class="personalize-modal link-modal-view" v-model="menu" :close-on-content-click="false" location="top">
             <template v-slot:activator="{ props }">
                 <div class="menu-box ml-0 rotate mr-1 menu-box-btn" v-bind="props">
                     <v-icon class="mdi mdi-link mr-0 mt-0"></v-icon>
@@ -81,7 +81,7 @@ export default {
     box-shadow: 0 5px 24px 0 rgba(0, 0, 0, .08);
 }
 
-.personalize-modal .v-overlay__content .v-card::before {
+.link-modal-view .v-overlay__content .v-card::before {
     content: "";
     position: fixed;
     pointer-events: none;
