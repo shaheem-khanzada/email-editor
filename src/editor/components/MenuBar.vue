@@ -23,10 +23,9 @@
         <MoreModal />
         <div class="divider"></div>
         <LinkModal />
-        <span class="editor-span">
-            <v-icon class="mdi mdi-image-outline"></v-icon>
-            <v-tooltip activator="parent" location="top">Insert image</v-tooltip>
-        </span>
+        <!-- /// Upload Modal /// -->
+        <UploadModal v-model="drawer" />
+        <!-- /// Upload Modal /// -->
         <PersonalizeModal />
         <InsertModal />
     </div>
@@ -37,9 +36,12 @@ import MoreModal from "@/editor/components/modal/MoreModal.vue";
 import LinkModal from "@/editor/components/modal/LinkModal.vue";
 import PersonalizeModal from "@/editor/components/modal/PersonalizeModal.vue";
 import InsertModal from "@/editor/components/modal/InsertModal.vue";
+import UploadModal from "@/editor/components/modal/UploadModal.vue"
+import { ref } from "vue";
 
 // Declare props
 const props = defineProps(['editor']);
+const drawer = ref(null);
 
 </script>
 
