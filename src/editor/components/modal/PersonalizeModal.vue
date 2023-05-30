@@ -232,7 +232,7 @@ export default {
 
 .contact-activity {
     overflow: auto;
-    max-height: 203px;
+    max-height: 200px;
     padding: 12px 0 0 0;
 }
 
