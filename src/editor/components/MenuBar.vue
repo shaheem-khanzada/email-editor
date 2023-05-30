@@ -36,7 +36,7 @@ import MoreModal from "@/editor/components/modal/MoreModal.vue";
 import LinkModal from "@/editor/components/modal/LinkModal.vue";
 import PersonalizeModal from "@/editor/components/modal/PersonalizeModal.vue";
 import InsertModal from "@/editor/components/modal/InsertModal.vue";
-import UploadModal from "@/editor/components/modal/UploadModal.vue"
+import UploadModal from "@/editor/components/modal/upload_modal/UploadModal.vue"
 import { ref } from "vue";
 
 // Declare props
