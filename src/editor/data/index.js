@@ -30,6 +30,7 @@ export const folders = [
         nodes: [
             {
                 id: 2,
+                expanded: false,
                 label: "Wallet",
             },
             {
@@ -38,10 +39,12 @@ export const folders = [
                 nodes: [
                     {
                         id: 4,
+                        expanded: false,
                         label: "Menu",
                     },
                     {
                         id: 5,
+                        expanded: false,
                         label: "About",
                     },
                 ],
@@ -51,5 +54,7 @@ export const folders = [
     {
         id: 6,
         label: "Window",
+        expanded: false,
+        nodes: []
     },
 ];

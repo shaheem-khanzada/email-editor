@@ -78,7 +78,18 @@
                                                 <v-list-item>
                                                     Select folder
                                                 </v-list-item>
-                                                <Tree :nodes="store.folders" :use-checkbox="false" :use-icon="true" />
+                                                <Tree :nodes="store.folders" :use-checkbox="false" :use-icon="true">
+                                                    <template #iconActive>
+                                                        <slot name="iconActive">
+                                                            <v-icon class="mdi mdi-folder"></v-icon>
+                                                        </slot>
+                                                    </template>
+                                                    <template #iconInactive>
+                                                        <slot name="iconInactive">
+                                                            <v-icon class="mdi mdi-folder-open"></v-icon>
+                                                        </slot>
+                                                    </template>
+                                                </Tree>
                                                 <!-- <div class="folder-selected-list">
                                                     <ul>
                                                         <li class="active">
