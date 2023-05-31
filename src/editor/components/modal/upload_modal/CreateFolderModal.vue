@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="dialog" class="create-folder" width="450px">
+    <v-dialog class="create-folder" width="450px">
         <v-card>
             <v-card-text class="pa-0">
                 <h3>

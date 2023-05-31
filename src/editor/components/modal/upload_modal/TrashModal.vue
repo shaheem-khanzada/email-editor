@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="moveTrash" class="move-trash-modal" width="500px">
+    <v-dialog class="move-trash-modal" width="500px">
         <v-card>
             <v-card-text class="pa-0">
                 <h3>

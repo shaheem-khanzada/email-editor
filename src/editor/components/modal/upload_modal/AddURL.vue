@@ -1,5 +1,5 @@
 <template>
-    <div class="url-wrapper" :class="{active: store.toggleUrlModal}">
+    <div class="url-wrapper" :class="{ active: store.toggleUrlModal }">
         <v-list-item class="nav-header">
             <div class="d-flex align-center">
                 <span class="back-icon" @click="store.toogleState('toggleUrlModal')">
