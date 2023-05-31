@@ -4,7 +4,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from '@tiptap/extension-underline'
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
-import { fontSizes, fontFamilies, colors, switches } from '../data'
+import { fontSizes, fontFamilies, colors, switches, folders } from '../data'
 import { FontSize } from '../extensions/FontSize';
 
 
@@ -22,7 +22,8 @@ export const useEditorStore = defineStore('editor-store', {
         toggleCreateModal: false,
         toggleFolderDetail: false,
         toggleUrlModal: false,
-        toogleMoveTrashModal: false
+        toogleMoveTrashModal: false,
+        folders
     }),
     getters: {
         activeFontFamily: (state) => {

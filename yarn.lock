@@ -1409,6 +1409,11 @@ vue-demi@>=0.14.5:
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.5.tgz#676d0463d1a1266d5ab5cba932e043d8f5f2fbd9"
   integrity sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==
 
+vue3-tree@^0.11.5:
+  version "0.11.5"
+  resolved "https://registry.yarnpkg.com/vue3-tree/-/vue3-tree-0.11.5.tgz#85fdc34ba746688fd557d9460793cb3cab062d7f"
+  integrity sha512-h6SzaNDnACvZsCq6GQybtyWvRyxPjzvYfNqYpvq99OprX5UPzXJwbWJbNUHod0lpwM2gbidnx2izbQSedgY+Zw==
+
 vue@^3.2.0:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.3.4.tgz#8ed945d3873667df1d0fcf3b2463ada028f88bd6"

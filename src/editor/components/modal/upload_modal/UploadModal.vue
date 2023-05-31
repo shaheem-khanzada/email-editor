@@ -78,17 +78,7 @@
                                                 <v-list-item>
                                                     Select folder
                                                 </v-list-item>
-                                                <v-treeview v-model="tree" :open="open" :items="items" activatable
-                                                    item-key="name" open-on-click>
-                                                    <template v-slot:prepend="{ item, open }">
-                                                        <v-icon v-if="!item.file">
-                                                            {{ open ? 'mdi-folder-open' : 'mdi-folder' }}
-                                                        </v-icon>
-                                                        <v-icon v-else>
-                                                            {{ files[item.file] }}
-                                                        </v-icon>
-                                                    </template>
-                                                </v-treeview>
+                                                <Tree :nodes="store.folders" :use-checkbox="false" :use-icon="true" />
                                                 <!-- <div class="folder-selected-list">
                                                     <ul>
                                                         <li class="active">
@@ -235,79 +225,16 @@ import AddURL from "@/editor/components/modal/upload_modal/AddURL.vue"
 import FileDetailModal from "@/editor/components/modal/upload_modal/FileDetailModal.vue"
 import AddFile from "@/editor/components/modal/upload_modal/AddFile.vue"
 import { useEditorStore } from "@/editor/store/EditorStore";
+import Tree from "vue3-tree";
+import "vue3-tree/dist/style.css";
+
 const store = useEditorStore()
 
 const props = defineProps(['editor']);
 const hideDiv = ref(false);
 const menu = ref(false);
 
-const open = ['public'];
-const files = {
-    html: 'mdi-language-html5',
-    js: 'mdi-nodejs',
-    json: 'mdi-json',
-    md: 'mdi-markdown',
-    pdf: 'mdi-file-pdf',
-    png: 'mdi-file-image',
-    txt: 'mdi-file-document-outline',
-    xls: 'mdi-file-excel'
-};
-const tree = [];
-const items = [
-    {
-        name: '.git'
-    },
-    {
-        name: 'node_modules'
-    },
-    {
-        name: 'public',
-        children: [
-            {
-                name: 'static',
-                children: [{
-                    name: 'logo.png',
-                    file: 'png'
-                }]
-            },
-            {
-                name: 'favicon.ico',
-                file: 'png'
-            },
-            {
-                name: 'index.html',
-                file: 'html'
-            }
-        ]
-    },
-    {
-        name: '.gitignore',
-        file: 'txt'
-    },
-    {
-        name: 'babel.config.js',
-        file: 'js'
-    },
-    {
-        name: 'package.json',
-        file: 'json'
-    },
-    {
-        name: 'README.md',
-        file: 'md'
-    },
-    {
-        name: 'vue.config.js',
-        file: 'js'
-    },
-    {
-        name: 'yarn.lock',
-        file: 'txt'
-    }
-];
-
 const headerActive = ref(false);
-const urlModal = ref(false);
 function toggleClass() {
     headerActive.value = !headerActive.value
 }

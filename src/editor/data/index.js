@@ -22,3 +22,34 @@ export const switches = [
     "#FFD966", "#93C47D", "#76A5AF", "#6FA8DC", "#8E7CC3", "#0C5394", "#073763", "#4C1130",
     "#C27BA0", "#CCCCCC", "#CC0201", "#E69138", "#F1C233", "#351C75", "#20124D", "#FFFF00",
 ];
+
+export const folders = [
+    {
+        id: 1,
+        label: "Home",
+        nodes: [
+            {
+                id: 2,
+                label: "Wallet",
+            },
+            {
+                id: 3,
+                label: "Balance",
+                nodes: [
+                    {
+                        id: 4,
+                        label: "Menu",
+                    },
+                    {
+                        id: 5,
+                        label: "About",
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        id: 6,
+        label: "Window",
+    },
+];
