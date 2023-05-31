@@ -201,28 +201,7 @@
                 </v-list-action>
             </div>
             <!-- /// URL Box /// -->
-            <div class="url-wrapper" :class="urlModal && 'active'">
-                <v-list-item class="nav-header">
-                    <div class="d-flex align-center">
-                        <span class="back-icon" @click="urlModalPanel()">
-                            <v-icon class="mdi mdi-chevron-left"></v-icon>
-                        </span>
-                        <h3>Insert from URL</h3>
-                    </div>
-                    <span class="icon-bg" @click.stop="drawer = !drawer">
-                        <v-icon class="mdi mdi-window-close"></v-icon>
-                    </span>
-                </v-list-item>
-                <div class="content-area">
-                    <label>Image URL</label>
-                    <div class="field-btn">
-                        <v-text-field class="bg-remove" density="compact" variant="solo" single-line hide-details
-                            placeholder="Type an image URL">
-                        </v-text-field>
-                        <v-btn>Preview</v-btn>
-                    </div>
-                </div>
-            </div>
+            <AddURL :class="urlModal && 'active'" />
             <!-- /// URL Box /// -->
             <!-- /// File Details /// -->
             <div class="file-detail-wrapper" :class="fileDetail && 'active'">
@@ -240,7 +219,7 @@
                 <div class="content-area">
                     <div class="avatar-name-field">
                         <input type="text" value="avatar-four">
-                        <v-icon class="mdi mdi-pencil-outline"></v-icon>
+                        <v-icon class="mdi mdi-marker"></v-icon>
                     </div>
                     <!-- // -->
                     <div class="image-view-box mb-4">
@@ -272,8 +251,11 @@
                     </v-menu>
                     <!-- // -->
                     <div class="image-description">
-                        <textarea name="" id=""
-                            placeholder="A short description of the image (up to 150 characters)"></textarea>
+                        <div class="icon-box">
+                            <textarea name="" id=""
+                                placeholder="A short description of the image (up to 150 characters)"></textarea>
+                            <v-icon class="mdi mdi-marker marker-icon"></v-icon>
+                        </div>
                         <div class="description-btn mt-2 mb-6">
                             <v-btn variant="text" class="default-save-btn mr-3" disabled>Save</v-btn>
                             <v-btn variant="text" class="default-cancel-btn">Cancel</v-btn>
@@ -429,6 +411,7 @@
 import { ref } from "vue";
 import CreateFolderModal from "@/editor/components/modal/upload_modal/CreateFolderModal.vue"
 import TrashModal from "@/editor/components/modal/upload_modal/TrashModal.vue"
+import AddURL from "@/editor/components/modal/upload_modal/AddURL.vue"
 const props = defineProps(['editor']);
 const drawer = ref(null);
 const dialog = ref(false);
@@ -1003,73 +986,6 @@ function fileDetailPanel() {
 
 /* /// Folder Details /// */
 
-/* /// URL Box Styling /// */
-.url-wrapper {
-    top: 0;
-    width: 590px;
-    position: fixed;
-    min-height: 100vh;
-    transition: all 0.5s ease;
-    transform: translateX(100%);
-}
-
-.url-wrapper.active {
-    transform: translateX(0);
-    transition: all 0.5s ease;
-}
-
-.url-wrapper .back-icon {
-    display: flex;
-}
-
-.url-wrapper .nav-header {
-    padding: 14px 25px 14px 20px;
-}
-
-.url-wrapper .content-area {
-    padding: 30px 40px 0;
-    background: #ffffff;
-    min-height: calc(100vh - 68px);
-}
-
-.url-wrapper .content-area label {
-    display: block;
-    font-size: 14px;
-    color: #33475b;
-    margin-bottom: 8px;
-    font-family: LexendDeca-Medium;
-}
-
-.url-wrapper .content-area .field-btn {
-    display: flex;
-    align-items: center;
-}
-
-.url-wrapper .content-area .field-btn .v-btn {
-    font-size: 14px;
-    color: #506e91;
-    min-height: 42px;
-    margin-left: 12px;
-    letter-spacing: inherit;
-    text-transform: capitalize;
-    background-color: #eaf0f6;
-    border: 1px solid #cbd6e2;
-    box-shadow: 0 0 0 0 #cecece;
-    font-family: LexendDeca-Medium;
-}
-
-.translate-animate {
-    transform: translateX(0);
-    transition: all 0.5s ease;
-}
-
-.translate-animate.unactive {
-    transition: all 0.5s ease;
-    transform: translateX(-100%);
-}
-
-/* /// URL Box Styling /// */
-
 /* /// File Detail Styling /// */
 .file-detail-wrapper {
     top: 0;
@@ -1339,6 +1255,40 @@ button:hover {
     border: 1px solid #cbd6e2;
 }
 
+.image-description .icon-box {
+    display: flex;
+    position: relative;
+    margin-bottom: 15px;
+    border-bottom: 1px solid transparent;
+}
+
+.image-description .icon-box:hover {
+    border-color: #00a4bd;
+}
+
+.image-description .icon-box:hover .marker-icon {
+    opacity: 1;
+    visibility: visible;
+}
+
+.image-description textarea:focus~.marker-icon {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.image-description .icon-box .marker-icon {
+    top: 0;
+    right: 0;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #00a4bd;
+    position: absolute;
+    visibility: hidden;
+}
+
 .move-btn-row .move-btn {
     height: auto;
     min-width: auto;
@@ -1399,6 +1349,16 @@ button:hover {
     color: #506e91 !important;
     background-color: #eaf0f6;
     border: 1px solid #cbd6e2;
+}
+
+.translate-animate {
+    transform: translateX(0);
+    transition: all 0.5s ease;
+}
+
+.translate-animate.unactive {
+    transition: all 0.5s ease;
+    transform: translateX(-100%);
 }
 
 /* /// v-navigation-drawer /// */

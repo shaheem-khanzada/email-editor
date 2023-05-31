@@ -16,7 +16,9 @@ export const useEditorStore = defineStore('editor-store', {
         switches: switches,
         selectedFontFamily: null, 
         selectedFontSize: null,
-        editor: null
+        editor: null,
+        drawer: null,
+        toggleUrlModal: false,
     }),
     getters: {
         activeFontFamily: (state) => {
@@ -52,6 +54,9 @@ export const useEditorStore = defineStore('editor-store', {
             console.log("size", size);
             console.log("selectedFontSize", this.selectedFontSize);
             this.editor.chain().focus().setFontSize(size).run();
-        }
+        },
+        toogleState(key) {
+            this[key] = !this[key]
+        },
     },
 })
