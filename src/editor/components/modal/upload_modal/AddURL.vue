@@ -1,5 +1,5 @@
 <template>
-    <div class="url-wrapper" :class="toggleUrlModal && 'active'">
+    <div class="url-wrapper" :class="{active: store.toggleUrlModal}">
         <v-list-item class="nav-header">
             <div class="d-flex align-center">
                 <span class="back-icon" @click="store.toogleState('toggleUrlModal')">
@@ -7,7 +7,7 @@
                 </span>
                 <h3>Insert from URL</h3>
             </div>
-            <span class="icon-bg" @click.stop="drawer = !drawer">
+            <span class="icon-bg" @click.stop="store.toogleState('toogleDrawer')">
                 <v-icon class="mdi mdi-window-close"></v-icon>
             </span>
         </v-list-item>
@@ -24,10 +24,9 @@
 </template>
 
 <script setup>
-
-import { ref } from "vue";
 import { useEditorStore } from "@/editor/store/EditorStore";
 const store = useEditorStore()
+console.log('store.toggleUrlModal', store.toggleUrlModal)
 const props = defineProps(['editor']);
 
 </script>

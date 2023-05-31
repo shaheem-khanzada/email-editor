@@ -1,11 +1,11 @@
 <template>
     <div>
-        <span class="editor-span" @click.stop="drawer = !drawer">
+        <span class="editor-span" @click.stop="store.toogleState('toogleDrawer')">
             <v-icon class="mdi mdi-image-outline txt-20"></v-icon>
             <v-tooltip activator="parent" location="top">Insert image</v-tooltip>
         </span>
-        <v-navigation-drawer v-model="drawer" location="right" temporary hide-overlay>
-            <div class="translate-animate" :class="urlModal && 'unactive' || fileDetail && 'unactive'">
+        <v-navigation-drawer v-model="store.toogleDrawer" location="right" temporary hide-overlay>
+            <div class="translate-animate" :class="{unactive: store.toggleUrlModal, unactive: store.toogleFileDetail}">
                 <v-list-item class="nav-header" :class="headerActive && 'active'">
                     <div class="d-flex align-center">
                         <span class="back-icon" @click="toggleClass()">
@@ -13,7 +13,7 @@
                         </span>
                         <h3>Insert image</h3>
                     </div>
-                    <span class="icon-bg" @click.stop="drawer = !drawer">
+                    <span class="icon-bg" @click.stop="store.toogleState('toogleDrawer')">
                         <v-icon class="mdi mdi-window-close"></v-icon>
                     </span>
                 </v-list-item>
@@ -43,7 +43,7 @@
                                             <img v-bind="props"
                                                 src="https://previews.123rf.com/images/pandavector/pandavector1901/pandavector190105281/126044187-isolated-object-of-avatar-and-dummy-symbol-collection-of-avatar-and-image-stock-symbol-for-web.jpg"
                                                 alt="">
-                                            <button @click="fileDetailPanel()">Details</button>
+                                            <button @click="store.toogleState('toogleFileDetail')">Details</button>
                                         </template>
                                         <v-list>
                                             <v-list-item>
@@ -122,17 +122,17 @@
                                             </v-card-actions>
                                         </v-card>
                                     </v-menu>
-                                    <v-list-tile class="browse-folder" @click="dialog = true">
+                                    <v-list-tile class="browse-folder" @click="store.toogleState('toggleCreateModal')">
                                         <v-icon class="mdi mdi-plus txt-16"></v-icon>
                                         Add folder
                                     </v-list-tile>
                                 </div>
                             </div>
                             <!-- /// -->
-                            <div :class="folderDetail && 'hide'">
+                            <div :class={hide: store.toggleFolderDetail}>
                                 <h4>Home</h4>
                                 <div class="folder-list">
-                                    <div class="list-details" @click="toggleClassFolder()">
+                                    <div class="list-details" @click="store.toogleState('toggleFolderDetail')">
                                         <v-icon class="mdi mdi-folder"></v-icon>
                                         Dashboard
                                     </div>
@@ -152,7 +152,7 @@
                                                 <img v-bind="props"
                                                     src="https://previews.123rf.com/images/pandavector/pandavector1901/pandavector190105281/126044187-isolated-object-of-avatar-and-dummy-symbol-collection-of-avatar-and-image-stock-symbol-for-web.jpg"
                                                     alt="">
-                                                <button @click="fileDetailPanel()">Details</button>
+                                                <button @click="store.toogleState('toogleFileDetail')">Details</button>
                                             </template>
                                             <v-list>
                                                 <v-list-item>
@@ -175,8 +175,8 @@
                                 </div>
                             </div>
                             <!-- /// Folder Details /// -->
-                            <div class="foldr-details" :class="folderDetail && 'show'">
-                                <v-list-tile class="browse-folder" @click="toggleClassFolder()">
+                            <div class="foldr-details" :class="{show: store.toggleFolderDetail}">
+                                <v-list-tile class="browse-folder" @click="store.toogleState('toggleFolderDetail')">
                                     Home
                                     <v-icon class="mdi mdi-chevron-right"></v-icon>
                                 </v-list-tile>
@@ -184,7 +184,7 @@
                                 <h5 class="text-center mt-0 mb-4">No images are in this folder</h5>
                                 <p>
                                     Drop files in here to upload or
-                                    <v-list-tile class="browse-folder" @click="dialog = true">create a new
+                                    <v-list-tile class="browse-folder" @click="store.toogleState('toggleCreateModal')">create a new
                                         folder.</v-list-tile>
                                 </p>
                             </div>
@@ -197,22 +197,22 @@
                         <button class="btn">Upload images</button>
                         <input type="file" name="myfile" />
                     </div>
-                    <v-list-tile class="add-url" @click="urlModalPanel()">Add from URL</v-list-tile>
+                    <v-list-tile class="add-url" @click="store.toogleState('toggleUrlModal')">Add from URL</v-list-tile>
                 </v-list-action>
             </div>
             <!-- /// URL Box /// -->
             <AddURL :class="urlModal && 'active'" />
             <!-- /// URL Box /// -->
             <!-- /// File Details /// -->
-            <div class="file-detail-wrapper" :class="fileDetail && 'active'">
+            <div class="file-detail-wrapper" :class="{active: store.toogleFileDetail}">
                 <v-list-item class="nav-header">
                     <div class="d-flex align-center">
-                        <span class="back-icon" @click="fileDetailPanel()">
+                        <span class="back-icon" @click="store.toogleState('toogleFileDetail')">
                             <v-icon class="mdi mdi-chevron-left"></v-icon>
                         </span>
                         <h3>File details</h3>
                     </div>
-                    <span class="icon-bg" @click.stop="drawer = !drawer">
+                    <span class="icon-bg" @click.stop="store.toogleState('toogleDrawer')">
                         <v-icon class="mdi mdi-window-close"></v-icon>
                     </span>
                 </v-list-item>
@@ -385,7 +385,7 @@
                                 </v-card>
                             </v-menu>
                             <v-btn variant="text" class="mr-3 move-btn">Clone and edit</v-btn>
-                            <v-btn variant="text" class="mr-3 move-btn" @click="moveTrash = true">Move to trash</v-btn>
+                            <v-btn variant="text" class="mr-3 move-btn" @click="store.toogleState('toogleMoveTrashModal')">Move to trash</v-btn>
                         </div>
                     </div>
                 </div>
@@ -397,11 +397,11 @@
         </v-navigation-drawer>
 
         <!-- //// Create Folder Modal //// -->
-        <CreateFolderModal v-model="dialog" />
+        <CreateFolderModal v-model="store.toggleCreateModal" />
         <!-- //// Create Folder Modal //// -->
 
         <!-- //// Move Trash Modal //// -->
-        <TrashModal v-model="moveTrash" />
+        <TrashModal v-model="store.toogleMoveTrashModal" />
         <!-- //// Move Trash Modal //// -->
     </div>
 </template>
@@ -412,28 +412,17 @@ import { ref } from "vue";
 import CreateFolderModal from "@/editor/components/modal/upload_modal/CreateFolderModal.vue"
 import TrashModal from "@/editor/components/modal/upload_modal/TrashModal.vue"
 import AddURL from "@/editor/components/modal/upload_modal/AddURL.vue"
+import { useEditorStore } from "@/editor/store/EditorStore";
+const store = useEditorStore()
+
 const props = defineProps(['editor']);
-const drawer = ref(null);
-const dialog = ref(false);
-const moveTrash = ref(false);
 const hideDiv = ref(false);
 const menu = ref(false);
 const menuMove = ref(false);
-const folderDetail = ref(false);
 const headerActive = ref(false);
 const urlModal = ref(false);
-const fileDetail = ref(false);
 function toggleClass() {
     headerActive.value = !headerActive.value
-}
-function toggleClassFolder() {
-    folderDetail.value = !folderDetail.value
-}
-function urlModalPanel() {
-    urlModal.value = !urlModal.value
-}
-function fileDetailPanel() {
-    fileDetail.value = !fileDetail.value
 }
 
 </script>

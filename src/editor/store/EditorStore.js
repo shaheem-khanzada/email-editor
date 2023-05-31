@@ -17,8 +17,12 @@ export const useEditorStore = defineStore('editor-store', {
         selectedFontFamily: null, 
         selectedFontSize: null,
         editor: null,
-        drawer: null,
+        toogleDrawer: null,
+        toogleFileDetail: false,
+        toggleCreateModal: false,
+        toggleFolderDetail: false,
         toggleUrlModal: false,
+        toogleMoveTrashModal: false
     }),
     getters: {
         activeFontFamily: (state) => {
@@ -51,12 +55,10 @@ export const useEditorStore = defineStore('editor-store', {
             this.editor.chain().focus().setFontFamily(fontFamily).run()
         },
         updateFontSize(size) {
-            console.log("size", size);
-            console.log("selectedFontSize", this.selectedFontSize);
             this.editor.chain().focus().setFontSize(size).run();
         },
         toogleState(key) {
-            this[key] = !this[key]
+            this[key] = !this[key];
         },
     },
 })
