@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                             <!-- /// -->
-                            <div :class={hide: store.toggleFolderDetail}>
+                            <div :class="{hide: store.toggleFolderDetail}">
                                 <h4>Home</h4>
                                 <div class="folder-list">
                                     <div class="list-details" @click="store.toogleState('toggleFolderDetail')">
