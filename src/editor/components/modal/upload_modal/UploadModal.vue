@@ -78,7 +78,8 @@
                                                 <v-list-item>
                                                     Select folder
                                                 </v-list-item>
-                                                <Tree :nodes="store.folders" :use-checkbox="false" :use-icon="true">
+                                                <Tree class="tree-wrapper" :nodes="store.folders" :use-checkbox="false"
+                                                    :use-icon="true">
                                                     <template #iconActive>
                                                         <slot name="iconActive">
                                                             <v-icon class="mdi mdi-folder"></v-icon>
@@ -802,6 +803,44 @@ function toggleClass() {
     transition: all 0.5s ease;
     transform: translateX(-100%);
 }
+
+/* /// Tree Styling /// */
+.tree-wrapper {
+    overflow: auto;
+    max-height: 280px;
+    margin: 16px 0 16px 0;
+    border: 1px solid #cbd6e2;
+}
+
+.tree-wrapper .tree-list {
+    gap: 1px !important;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item {
+    padding: 8px 12px 8px 8px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item:hover::before {
+    background-color: #e5f5f8;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item .v-icon {
+    font-size: 22px;
+    color: #00a4bd;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item .tree-row-txt {
+    font-size: 14px;
+    color: #33475b;
+    margin-left: 8px;
+    font-family: LexendDeca-Light;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row {
+    padding-left: 12px !important;
+}
+
+/* /// Tree Styling /// */
 
 /* /// v-navigation-drawer /// */
 </style>
