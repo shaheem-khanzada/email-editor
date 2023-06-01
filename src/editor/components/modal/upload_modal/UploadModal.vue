@@ -78,8 +78,8 @@
                                                 <v-list-item>
                                                     Select folder
                                                 </v-list-item>
-                                                <Tree class="tree-wrapper" :nodes="store.folders" :use-checkbox="false"
-                                                    :use-icon="true">
+                                                <Tree class="tree-wrapper" @nodeClick="onNodeClick" :nodes="store.folders" :selectedFolderId="selectedFolderId"
+                                                    :use-checkbox="false" :gap="0" :use-icon="true">
                                                     <template #iconActive>
                                                         <slot name="iconActive">
                                                             <v-icon class="mdi mdi-folder"></v-icon>
@@ -237,19 +237,24 @@ import AddURL from "@/editor/components/modal/upload_modal/AddURL.vue"
 import FileDetailModal from "@/editor/components/modal/upload_modal/FileDetailModal.vue"
 import AddFile from "@/editor/components/modal/upload_modal/AddFile.vue"
 import { useEditorStore } from "@/editor/store/EditorStore";
-import Tree from "vue3-tree";
-import "vue3-tree/dist/style.css";
+import Tree, { getNodeById } from "@/editor/tree";
 
-const store = useEditorStore()
+const store = useEditorStore();
 
 const props = defineProps(['editor']);
 const hideDiv = ref(false);
 const menu = ref(false);
+const selectedFolderId = ref(null);
 
 const headerActive = ref(false);
 function toggleClass() {
     headerActive.value = !headerActive.value
 }
+
+const onNodeClick = (node) => {
+    console.log(node);
+    selectedFolderId.value = node.id
+};
 
 </script>
 
@@ -818,6 +823,22 @@ function toggleClass() {
 
 .tree-wrapper .tree-list .tree-row .tree-row-item {
     padding: 8px 12px 8px 8px;
+}
+
+.tree-wrapper .tree-list .tree-row .selected::before {
+    content: "";
+    border-left: 4px solid rgb(0, 164, 189);
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    border-radius: 3px;
+}
+
+.tree-wrapper .tree-list .tree-row .selected {
+    color: rgb(38 70 102);
+    background-color: rgb(229, 245, 248);
+    border-radius: 3px;
 }
 
 .tree-wrapper .tree-list .tree-row .tree-row-item:hover::before {
