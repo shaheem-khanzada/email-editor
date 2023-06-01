@@ -178,7 +178,8 @@
                             </div>
                         </v-card>
                     </v-menu>
-                    <v-btn variant="text" class="mr-3 move-btn">Clone and edit</v-btn>
+                    <v-btn variant="text" class="mr-3 move-btn" @click="store.toogleState('toggleCloneEditModal')">Clone and
+                        edit</v-btn>
                     <v-btn variant="text" class="mr-3 move-btn" @click="store.toogleState('toogleMoveTrashModal')">Move to
                         trash</v-btn>
                 </div>

@@ -23,6 +23,7 @@ export const useEditorStore = defineStore('editor-store', {
         toggleFolderDetail: false,
         toggleUrlModal: false,
         toogleMoveTrashModal: false,
+        toggleCloneEditModal: false,
         folders
     }),
     getters: {

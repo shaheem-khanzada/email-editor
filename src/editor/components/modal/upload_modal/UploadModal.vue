@@ -211,12 +211,15 @@
                     <v-list-tile class="add-url" @click="store.toogleState('toggleUrlModal')">Add from URL</v-list-tile>
                 </v-list-action>
             </div>
+
             <!-- /// URL Box /// -->
             <AddURL :class="{ active: store.toggleUrlModal }" />
             <!-- /// URL Box /// -->
+
             <!-- /// File Details /// -->
             <FileDetailModal :class="{ active: store.toogleFileDetail }" />
             <!-- /// File Details /// -->
+
         </v-navigation-drawer>
 
         <!-- //// Create Folder Modal //// -->
@@ -226,6 +229,11 @@
         <!-- //// Move Trash Modal //// -->
         <TrashModal v-model="store.toogleMoveTrashModal" />
         <!-- //// Move Trash Modal //// -->
+
+        <!-- //// Clone Edit Modal //// -->
+        <CloneEditModal v-model="store.toggleCloneEditModal" />
+        <!-- //// Clone Edit Modal //// -->
+
     </div>
 </template>
 
@@ -234,6 +242,7 @@
 import { ref } from "vue";
 import CreateFolderModal from "@/editor/components/modal/upload_modal/CreateFolderModal.vue"
 import TrashModal from "@/editor/components/modal/upload_modal/TrashModal.vue"
+import CloneEditModal from "@/editor/components/modal/upload_modal/CloneEditModal.vue"
 import AddURL from "@/editor/components/modal/upload_modal/AddURL.vue"
 import FileDetailModal from "@/editor/components/modal/upload_modal/FileDetailModal.vue"
 import AddFile from "@/editor/components/modal/upload_modal/AddFile.vue"

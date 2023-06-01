@@ -15,7 +15,8 @@
                     </p>
                     <div class="mt-6">
                         <v-btn variant="text" class="save-btn mr-3">Move file to trash</v-btn>
-                        <v-btn variant="text" class="cancel-btn" @click="moveTrash = false">Cancel</v-btn>
+                        <v-btn variant="text" class="cancel-btn"
+                            @click="store.toogleState('toogleMoveTrashModal')">Cancel</v-btn>
                     </div>
                 </div>
             </v-card-text>
@@ -26,6 +27,8 @@
 <script setup>
 
 import { ref } from "vue";
+import { useEditorStore } from "@/editor/store/EditorStore";
+const store = useEditorStore();
 const props = defineProps(['editor']);
 const moveTrash = ref(false);
 

@@ -4,7 +4,7 @@
             <v-card-text class="pa-0">
                 <h3>
                     Create folder
-                    <span class="icon-bg" @click="dialog = false">
+                    <span class="icon-bg" @click="store.toogleState('toggleCreateModal')">
                         <v-icon class="mdi mdi-window-close"></v-icon>
                     </span>
                 </h3>
@@ -14,7 +14,8 @@
                         hide-details></v-text-field>
                     <div class="mt-6">
                         <v-btn variant="text" class="save-btn mr-3">Save</v-btn>
-                        <v-btn variant="text" class="cancel-btn">Cancel</v-btn>
+                        <v-btn variant="text" class="cancel-btn"
+                            @click="store.toogleState('toggleCreateModal')">Cancel</v-btn>
                     </div>
                 </div>
             </v-card-text>
@@ -25,6 +26,8 @@
 <script setup>
 
 import { ref } from "vue";
+import { useEditorStore } from "@/editor/store/EditorStore";
+const store = useEditorStore();
 const props = defineProps(['editor']);
 const dialog = ref(false);
 
