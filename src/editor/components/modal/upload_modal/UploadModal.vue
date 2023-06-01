@@ -78,8 +78,9 @@
                                                 <v-list-item>
                                                     Select folder
                                                 </v-list-item>
-                                                <Tree class="tree-wrapper" @nodeClick="onNodeClick" :nodes="store.folders" :selectedFolderId="selectedFolderId"
-                                                    :use-checkbox="false" :gap="0" :use-icon="true">
+                                                <Tree class="tree-wrapper" @nodeClick="onNodeClick" :nodes="store.folders"
+                                                    :selectedFolderId="selectedFolderId" :use-checkbox="false" :gap="0"
+                                                    :use-icon="true">
                                                     <template #iconActive>
                                                         <slot name="iconActive">
                                                             <v-icon class="mdi mdi-folder"></v-icon>
@@ -822,23 +823,15 @@ const onNodeClick = (node) => {
 }
 
 .tree-wrapper .tree-list .tree-row .tree-row-item {
+    cursor: pointer;
     padding: 8px 12px 8px 8px;
-}
-
-.tree-wrapper .tree-list .tree-row .selected::before {
-    content: "";
-    border-left: 4px solid rgb(0, 164, 189);
-    height: 100%;
-    left: 0px;
-    position: absolute;
-    top: 0px;
-    border-radius: 3px;
+    border-left: 4px solid transparent;
 }
 
 .tree-wrapper .tree-list .tree-row .selected {
     color: rgb(38 70 102);
+    border-color: rgb(0, 164, 189);
     background-color: rgb(229, 245, 248);
-    border-radius: 3px;
 }
 
 .tree-wrapper .tree-list .tree-row .tree-row-item:hover::before {
@@ -858,7 +851,23 @@ const onNodeClick = (node) => {
 }
 
 .tree-wrapper .tree-list .tree-row .tree-list .tree-row {
-    padding-left: 12px !important;
+    padding-left: 0 !important;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 20px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 32px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 44px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 56px;
 }
 
 /* /// Tree Styling /// */
