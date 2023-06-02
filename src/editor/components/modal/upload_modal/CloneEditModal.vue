@@ -11,19 +11,22 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <div class="resize-wrapper">
+                    <div class="resize-wrapper" v-if="!(store.toggleCropImage || store.toggleResizeImage)">
                         <div class="">
-                            <v-btn class="btn-resize mr-3" variant="text">Crop</v-btn>
-                            <v-btn class="btn-resize mr-3" variant="text">Resize</v-btn>
+                            <v-btn class="btn-resize mr-3" variant="text"
+                                @click="store.toogleState('toggleCropImage')">Crop</v-btn>
+                            <v-btn class="btn-resize mr-3" variant="text"
+                                @click="store.toogleState('toggleResizeImage')">Resize</v-btn>
                             <v-btn class="btn-resize mr-3" variant="text">Revert to Original</v-btn>
                         </div>
                         <div class="">
-                            <v-btn class="btn-resize-text mr-5" variant="text">Cancel</v-btn>
+                            <v-btn class="btn-resize-text mr-5" variant="text"
+                                @click="store.toogleState('toggleCloneEditModal')">Cancel</v-btn>
                             <v-btn class="btn-resize" variant="text" disabled>Save Clone</v-btn>
                         </div>
                     </div>
                     <!-- // -->
-                    <div class="size-wrapper">
+                    <div class="size-wrapper" v-if="store.toggleResizeImage">
                         <div class="d-flex align-center">
                             <p>
                                 Size (width x height)
@@ -44,17 +47,21 @@
                             </div>
                         </div>
                         <div class="">
-                            <v-btn class="btn-resize-text mr-5" variant="text">Back</v-btn>
+                            <v-btn class="btn-resize-text mr-5" variant="text"
+                                @click="store.toogleState('toggleResizeImage')">Back</v-btn>
                             <v-btn class="btn-resize" variant="text" disabled>Save Clone</v-btn>
                         </div>
                     </div>
                     <!-- // -->
-                    <div class="size-wrapper">
+                    <div class="size-wrapper" v-if="store.toggleCropImage">
                         <div class="d-flex align-center">
-                            <v-select class="custom-select" return-object :items="selectIcon" item-text="name"
-                                item-value="name" variant="solo">
+                            <v-select class="custom-select" return-object item-title="name" item-value="name"
+                                :items="store.cropDefaultSizes" variant="solo">
                                 <template v-slot:item="{ item }">
-                                    {{ item.name }}
+                                    <v-btn variant="text">
+                                        <v-icon> {{ item.value.iconName }}</v-icon>
+                                        {{ item.value.name }}
+                                    </v-btn>
                                 </template>
                             </v-select>
                             <p>
@@ -79,7 +86,8 @@
                             </div>
                         </div>
                         <div class="">
-                            <v-btn class="btn-resize-text mr-5" variant="text">Back</v-btn>
+                            <v-btn class="btn-resize-text mr-5" variant="text"
+                                @click="store.toogleState('toggleCropImage')">Back</v-btn>
                             <v-btn class="btn-resize" variant="text">Save Clone</v-btn>
                         </div>
                     </div>
@@ -91,16 +99,9 @@
 
 <script setup>
 
-import { ref } from "vue";
 import { useEditorStore } from "@/editor/store/EditorStore";
 const store = useEditorStore();
 const props = defineProps(['editor']);
-const dialog = ref(false);
-const selectIcon = ref[
-    { name: "Custom", iconName: "mdi-cog" },
-    { name: "Facebook", iconName: "mdi-cog" },
-    { name: "Instagram", iconName: "mdi-cog" }
-];
 
 </script>
 

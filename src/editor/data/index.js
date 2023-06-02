@@ -23,6 +23,12 @@ export const switches = [
     "#C27BA0", "#CCCCCC", "#CC0201", "#E69138", "#F1C233", "#351C75", "#20124D", "#FFFF00",
 ];
 
+export const cropDefaultSizes = [
+    { name: "Custom", iconName: "mdi-cog" },
+    { name: "Facebook", iconName: "mdi-cog" },
+    { name: "Instagram", iconName: "mdi-cog" }
+]
+
 export const folders = [
     {
         id: 1,
