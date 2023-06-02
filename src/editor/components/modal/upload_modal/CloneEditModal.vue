@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <div class="resize-wrapper" style="display: none">
+                    <div class="resize-wrapper">
                         <div class="">
                             <v-btn class="btn-resize mr-3" variant="text">Crop</v-btn>
                             <v-btn class="btn-resize mr-3" variant="text">Resize</v-btn>
@@ -48,6 +48,41 @@
                             <v-btn class="btn-resize" variant="text" disabled>Save Clone</v-btn>
                         </div>
                     </div>
+                    <!-- // -->
+                    <div class="size-wrapper">
+                        <div class="d-flex align-center">
+                            <v-select class="custom-select" return-object :items="selectIcon" item-text="name"
+                                item-value="name" variant="solo">
+                                <template v-slot:item="{ item }">
+                                    {{ item.name }}
+                                </template>
+                            </v-select>
+                            <p>
+                                Crop (width x height)
+                            </p>
+                            <div class="d-flex align-center">
+                                <v-text-field class="bg-remove" density="compact" variant="solo" single-line hide-details
+                                    placeholder="300">
+                                </v-text-field>
+                                <label class="mr-4">px</label>
+                            </div>
+                            <div class="d-flex align-center">
+                                <v-text-field class="bg-remove" density="compact" variant="solo" single-line hide-details
+                                    placeholder="300">
+                                </v-text-field>
+                                <label class="mr-4">px</label>
+                            </div>
+                            <div class="">
+                                <v-btn class="btn-resize btn-rotate" variant="text">
+                                    <v-icon class="mdi mdi-rotate-right"></v-icon>
+                                </v-btn>
+                            </div>
+                        </div>
+                        <div class="">
+                            <v-btn class="btn-resize-text mr-5" variant="text">Back</v-btn>
+                            <v-btn class="btn-resize" variant="text">Save Clone</v-btn>
+                        </div>
+                    </div>
                 </div>
             </v-card-text>
         </v-card>
@@ -61,6 +96,11 @@ import { useEditorStore } from "@/editor/store/EditorStore";
 const store = useEditorStore();
 const props = defineProps(['editor']);
 const dialog = ref(false);
+const selectIcon = ref[
+    { name: "Custom", iconName: "mdi-cog" },
+    { name: "Facebook", iconName: "mdi-cog" },
+    { name: "Instagram", iconName: "mdi-cog" }
+];
 
 </script>
 
@@ -244,5 +284,57 @@ const dialog = ref(false);
     color: #ffffff;
     margin: 0 8px 0 8px;
     transform: rotate(135deg);
+}
+
+.btn-rotate {
+    width: 40px;
+    min-width: auto;
+    padding: 8px 6px 6px 6px;
+}
+
+.btn-rotate .v-icon {
+    font-size: 24px;
+}
+
+.footer-column .size-wrapper .custom-select {
+    min-width: 110px;
+    margin-right: 16px;
+}
+
+.size-wrapper .custom-select .v-input__details {
+    display: none;
+}
+
+.size-wrapper .custom-select .v-field {
+    height: 40px;
+    background-color: #eaf0f6;
+}
+
+.size-wrapper .custom-select .v-field .v-field__input {
+    padding: 0;
+    height: auto;
+    min-height: auto;
+}
+
+.size-wrapper .custom-select .v-field .v-field__input .v-select__selection {
+    width: 100%;
+    padding: 7px 10px 7px 10px;
+}
+
+.size-wrapper .custom-select .v-field .v-field__input .v-select__selection .v-select__selection-text {
+    font-size: 16px;
+    color: #33475b;
+    font-family: LexendDeca-Light;
+}
+
+.size-wrapper .custom-select .v-field .v-field__input input {
+    width: 100%;
+    padding: 7px 10px 7px 10px;
+}
+
+.size-wrapper .custom-select .v-field .v-field__append-inner .v-icon {
+    font-size: 30px;
+    color: #00a4bd;
+    margin: 2px 0 0 -13px;
 }
 </style>

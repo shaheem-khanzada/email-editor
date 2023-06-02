@@ -135,38 +135,19 @@
                                 <v-list-item>
                                     Select folder
                                 </v-list-item>
-                                <div class="folder-selected-list">
-                                    <ul>
-                                        <li class="active">
+                                <Tree class="tree-wrapper" @nodeClick="onNodeClick" :nodes="store.folders"
+                                    :selectedFolderId="selectedFolderId" :use-checkbox="false" :gap="0" :use-icon="true">
+                                    <template #iconActive>
+                                        <slot name="iconActive">
+                                            <v-icon class="mdi mdi-folder"></v-icon>
+                                        </slot>
+                                    </template>
+                                    <template #iconInactive>
+                                        <slot name="iconInactive">
                                             <v-icon class="mdi mdi-folder-open"></v-icon>
-                                            Home
-                                        </li>
-                                        <ul>
-                                            <li>
-                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                Dashboard
-                                            </li>
-                                            <li>
-                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                Setting
-                                            </li>
-                                        </ul>
-                                        <li>
-                                            <v-icon class="mdi mdi-folder-open"></v-icon>
-                                            My Tasks
-                                        </li>
-                                        <ul>
-                                            <li>
-                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                Dashboard
-                                            </li>
-                                            <li>
-                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                Setting
-                                            </li>
-                                        </ul>
-                                    </ul>
-                                </div>
+                                        </slot>
+                                    </template>
+                                </Tree>
                             </v-list>
                             <div class="action-box">
                                 <v-btn color="primary" class="default-save-btn mr-3" variant="text">
@@ -195,9 +176,16 @@
 
 import { ref } from "vue";
 import { useEditorStore } from "@/editor/store/EditorStore";
+import Tree, { getNodeById } from "@/editor/tree";
 const store = useEditorStore()
 const props = defineProps(['editor']);
 const menuMove = ref(false);
+const selectedFolderId = ref(null);
+
+const onNodeClick = (node) => {
+    console.log(node);
+    selectedFolderId.value = node.id
+};
 
 </script>
 
@@ -538,6 +526,74 @@ button:hover {
     border-top-color: transparent !important;
     border-left-color: transparent !important;
 }
+
+/* /// Tree Styling /// */
+.tree-wrapper {
+    overflow: auto;
+    min-height: 320px;
+    max-height: 320px;
+    margin: 16px 0 16px 0;
+    border: 1px solid #cbd6e2;
+}
+
+.tree-wrapper .tree-list {
+    gap: 1px !important;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item {
+    cursor: pointer;
+    padding: 8px 12px 8px 8px;
+    border-left: 4px solid transparent;
+}
+
+.tree-wrapper .tree-list .tree-row {
+    transition: all 0.5s ease;
+}
+
+.tree-wrapper .tree-list .tree-row .selected {
+    color: rgb(38 70 102);
+    transition: all 0.5s ease;
+    border-color: rgb(0, 164, 189);
+    background-color: rgb(229, 245, 248);
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item:hover::before {
+    background-color: transparent;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item .v-icon {
+    font-size: 22px;
+    color: #00a4bd;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-row-item .tree-row-txt {
+    font-size: 14px;
+    color: #33475b;
+    margin-left: 8px;
+    font-family: LexendDeca-Light;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row {
+    padding-left: 0 !important;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 20px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 32px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 44px;
+}
+
+.tree-wrapper .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-list .tree-row .tree-row-item {
+    padding-left: 56px;
+}
+
+/* /// Tree Styling /// */
 
 /* /// File Detail Styling /// */
 </style>

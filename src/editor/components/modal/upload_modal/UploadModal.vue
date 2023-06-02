@@ -92,38 +92,6 @@
                                                         </slot>
                                                     </template>
                                                 </Tree>
-                                                <!-- <div class="folder-selected-list">
-                                                    <ul>
-                                                        <li class="active">
-                                                            <v-icon class="mdi mdi-folder-open"></v-icon>
-                                                            Home
-                                                        </li>
-                                                        <ul>
-                                                            <li>
-                                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                                Dashboard
-                                                            </li>
-                                                            <li>
-                                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                                Setting
-                                                            </li>
-                                                        </ul>
-                                                        <li>
-                                                            <v-icon class="mdi mdi-folder-open"></v-icon>
-                                                            My Tasks
-                                                        </li>
-                                                        <ul>
-                                                            <li>
-                                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                                Dashboard
-                                                            </li>
-                                                            <li>
-                                                                <v-icon class="mdi mdi-folder"></v-icon>
-                                                                Setting
-                                                            </li>
-                                                        </ul>
-                                                    </ul>
-                                                </div> -->
                                             </v-list>
                                             <v-card-actions class="action-box">
                                                 <v-btn color="primary" variant="text" @click="menu = false" disabled>
@@ -837,14 +805,19 @@ const onNodeClick = (node) => {
     border-left: 4px solid transparent;
 }
 
+.tree-wrapper .tree-list .tree-row {
+    transition: all 0.5s ease;
+}
+
 .tree-wrapper .tree-list .tree-row .selected {
     color: rgb(38 70 102);
+    transition: all 0.5s ease;
     border-color: rgb(0, 164, 189);
     background-color: rgb(229, 245, 248);
 }
 
 .tree-wrapper .tree-list .tree-row .tree-row-item:hover::before {
-    background-color: #e5f5f8;
+    background-color: transparent;
 }
 
 .tree-wrapper .tree-list .tree-row .tree-row-item .v-icon {
