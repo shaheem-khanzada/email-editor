@@ -24,6 +24,8 @@ export const useEditorStore = defineStore('editor-store', {
         toggleUrlModal: false,
         toogleMoveTrashModal: false,
         toggleCloneEditModal: false,
+        toggleResizeImage: false,
+        toggleCropImage: false,
         folders
     }),
     getters: {
