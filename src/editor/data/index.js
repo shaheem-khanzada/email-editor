@@ -24,9 +24,13 @@ export const switches = [
 ];
 
 export const cropDefaultSizes = [
-    { name: "Custom", iconName: "mdi-cog" },
-    { name: "Facebook", iconName: "mdi-cog" },
-    { name: "Instagram", iconName: "mdi-cog" }
+    { name: "Custom", iconName: "mdi-crop-square" },
+    { name: "Facebook", iconName: "mdi-facebook" },
+    { name: "Instagram (Square)", iconName: "mdi-instagram" },
+    { name: "Instagram (Portrait)", iconName: "mdi-instagram" },
+    { name: "Instagram (Landscape)", iconName: "mdi-instagram" },
+    { name: "LinkedIn", iconName: "mdi-linkedin" },
+    { name: "Twitter", iconName: "mdi-twitter" }
 ]
 
 export const folders = [

@@ -58,7 +58,7 @@
                             <v-select class="custom-select" return-object item-title="name" item-value="name"
                                 :items="store.cropDefaultSizes" variant="solo">
                                 <template v-slot:item="{ item }">
-                                    <v-btn variant="text">
+                                    <v-btn variant="text" class="select-btn">
                                         <v-icon> {{ item.value.iconName }}</v-icon>
                                         {{ item.value.name }}
                                     </v-btn>
@@ -337,5 +337,29 @@ const props = defineProps(['editor']);
     font-size: 30px;
     color: #00a4bd;
     margin: 2px 0 0 -13px;
+}
+
+.select-btn {
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #33475b;
+    border-radius: 0;
+    min-height: 40px;
+    padding: 8px 20px;
+    align-items: center;
+    letter-spacing: 0.3px;
+    text-transform: capitalize;
+    justify-content: flex-start;
+    font-family: LexendDeca-Light;
+}
+
+.select-btn .v-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.select-btn:hover {
+    background-color: #e5f5f8;
 }
 </style>
