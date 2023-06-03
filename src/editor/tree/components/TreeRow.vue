@@ -1,54 +1,31 @@
 <template>
-  <li
-    class="tree-row"
-    :style="{
-      gap: `${gap}px`,
-      paddingLeft: `${indentSize}px`,
-      '--row-hover-background': rowHoverBackground,
-    }"
-  >
-    <div
-      :class="{'tree-row-item': true, selected: node.id === selectedFolderId}"
-      @click.stop="handleClick(node)"
-    >
+  <li class="tree-row" :style="{
+    gap: `${gap}px`,
+    paddingLeft: `${indentSize}px`,
+    '--row-hover-background': rowHoverBackground,
+  }">
+    <div :class="{ 'tree-row-item': true, selected: node.id === selectedFolderId }" @click.stop="handleClick(node)">
       <div v-if="useIcon" class="tree-row-item-icon-wrapper">
-          <template v-if="!node.expanded">
-            <slot name="iconActive">
-              <arrow-right />
-            </slot>
-          </template>
-          <template v-else>
-            <slot name="iconInactive">
-              <arrow-down />
-            </slot>
-          </template>
+        <template v-if="!node.expanded">
+          <slot name="iconActive">
+            <arrow-right />
+          </slot>
+        </template>
+        <template v-else>
+          <slot name="iconInactive">
+            <arrow-down />
+          </slot>
+        </template>
       </div>
-      <slot
-        :id="node.id"
-        name="checkbox"
-        :node="node"
-        :checked="node.checked"
-        :indeterminate="node.indeterminate"
-      >
-        <input
-          v-if="useCheckbox"
-          v-model="node.checked"
-          type="checkbox"
-          :checked="node.checked"
-          :indeterminate="node.indeterminate"
-          @click.stop="onToggleCheckbox(node)"
-        />
+      <slot :id="node.id" name="checkbox" :node="node" :checked="node.checked" :indeterminate="node.indeterminate">
+        <input v-if="useCheckbox" v-model="node.checked" type="checkbox" :checked="node.checked"
+          :indeterminate="node.indeterminate" @click.stop="onToggleCheckbox(node)" />
       </slot>
       <span class="tree-row-txt">
         {{ node.label }}
       </span>
       <template v-if="childCount && showChildCount">
-        <slot
-          name="childCount"
-          :count="childCount"
-          :checkedCount="checkedChildCount"
-          :childs="node.nodes"
-        >
+        <slot name="childCount" :count="childCount" :checkedCount="checkedChildCount" :childs="node.nodes">
           <span class="child-count">
             {{ childCount }}
           </span>
@@ -62,44 +39,17 @@
         </div>
       </template>
     </div>
-    <ul
-      v-if="node.expanded"
-      class="tree-list"
-      :style="{ gap: `${gap}px` }"
-    >
-      <template
-        v-for="child in node.nodes"
-        :key="child.id"
-      >
-        <tree-row
-          v-if="!child.hidden"
-          :ref="`tree-row-${child.id}`"
-          :node="child"
-          :selectedFolderId="selectedFolderId"
-          :use-checkbox="useCheckbox"
-          :use-icon="useIcon"
-          :use-row-delete="useRowDelete"
-          :show-child-count="showChildCount"
-          :gap="gap"
-          :expand-row-by-default="expandRowByDefault"
-          :indent-size="indentSize"
-          :row-hover-background="rowHoverBackground"
-          :set-node="setNode"
-          :get-node="getNode"
-          :update-node="updateNode"
-          :expandable="expandable"
-          @delete-row="removedRow"
-          @node-click="(item) => handleClick(item, true)"
-          @toggle-checkbox="onToggleCheckbox"
-          @node-expanded="onNodeExpanded"
-        >
+    <ul v-if="node.expanded" class="tree-list animation-ul" :style="{ gap: `${gap}px` }">
+      <template v-for="child in node.nodes" :key="child.id">
+        <tree-row v-if="!child.hidden" :ref="`tree-row-${child.id}`" :node="child" :selectedFolderId="selectedFolderId"
+          :use-checkbox="useCheckbox" :use-icon="useIcon" :use-row-delete="useRowDelete"
+          :show-child-count="showChildCount" :gap="gap" :expand-row-by-default="expandRowByDefault"
+          :indent-size="indentSize" :row-hover-background="rowHoverBackground" :set-node="setNode" :get-node="getNode"
+          :update-node="updateNode" :expandable="expandable" @delete-row="removedRow"
+          @node-click="(item) => handleClick(item, true)" @toggle-checkbox="onToggleCheckbox"
+          @node-expanded="onNodeExpanded">
           <template #childCount="{ count, checkedCount, childs }">
-            <slot
-              name="childCount"
-              :count="count"
-              :checked-count="checkedCount"
-              :childs="childs"
-            />
+            <slot name="childCount" :count="count" :checked-count="checkedCount" :childs="childs" />
           </template>
           <template #iconActive>
             <slot name="iconActive">
@@ -117,13 +67,7 @@
             </slot>
           </template>
           <template #checkbox="{ node: slotNode, checked, indeterminate }">
-            <slot
-              :id="slotNode.id"
-              name="checkbox"
-              :node="slotNode"
-              :checked="checked"
-              :indeterminate="indeterminate"
-            />
+            <slot :id="slotNode.id" name="checkbox" :node="slotNode" :checked="checked" :indeterminate="indeterminate" />
           </template>
         </tree-row>
       </template>
@@ -146,7 +90,7 @@ export default {
   },
   props: {
     selectedFolderId: {
-     default: null      
+      default: null
     },
     node: {
       type: Object,
@@ -306,6 +250,20 @@ export default {
 
 .tree-row-txt {
   user-select: none;
+}
+
+.tree-row-item.selected~.animation-ul {
+  animation: fadeInOut 0.5s linear 1 forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 </style>
 
