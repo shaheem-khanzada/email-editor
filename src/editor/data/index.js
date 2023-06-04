@@ -33,6 +33,12 @@ export const cropDefaultSizes = [
     { name: "Twitter", iconName: "mdi-twitter" }
 ]
 
+export const defaultSizeImages = [
+    { name: "Default", sizeParagraph: "Better image quality" },
+    { name: "High", sizeParagraph: "Balanced for speed and quality" },
+    { name: "Low", sizeParagraph: "Faster load times" }
+]
+
 export const folders = [
     {
         id: 1,

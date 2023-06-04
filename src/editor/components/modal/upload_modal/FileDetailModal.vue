@@ -67,19 +67,16 @@
                         <label class="label-text d-flex align-center mb-2">
                             Image Optimization
                             <v-icon class="mdi mdi-information ml-2" v-bind="props"></v-icon>
-                            <v-menu transition="scale-transition">
-                                <template v-slot:activator="{ props }">
-                                    <div class="menu-box ml-2" v-bind="props">
-                                        <span class="btn-text">Default</span>
-                                        <v-icon class="mdi mdi-menu-down ma-0"></v-icon>
+                            <v-select close-on-select class="custom-select-size ml-2" return-object item-title="name"
+                                item-value="name" :items="store.defaultSizeImages" variant="solo"
+                                v-model="store.activeSizeImages">
+                                <template v-slot:item="{ item, props: { onClick } }">
+                                    <div @click="onClick" class="select-btn-size">
+                                        {{ item.value.name }}
+                                        <p> {{ item.value.sizeParagraph }}</p>
                                     </div>
                                 </template>
-                                <v-list>
-                                    <v-list-item v-for="(item, i) in items" :key="i">
-                                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
+                            </v-select>
                         </label>
                     </template>
                     <v-list>
@@ -530,9 +527,9 @@ button:hover {
 /* /// Tree Styling /// */
 .tree-wrapper {
     overflow: auto;
-    min-height: 320px;
     max-height: 320px;
     margin: 16px 0 16px 0;
+    transition: all 0.3s ease;
     border: 1px solid #cbd6e2;
 }
 
@@ -594,6 +591,76 @@ button:hover {
 }
 
 /* /// Tree Styling /// */
+
+/* /// Custom Size Select Styling /// */
+.custom-select-size .v-input__details {
+    display: none;
+}
+
+.custom-select-size {
+    width: auto;
+    min-width: auto;
+    max-width: fit-content;
+}
+
+.custom-select-size .v-input__control .v-field {
+    padding: 0;
+    box-shadow: 0 0 0 0 #cecece;
+}
+
+.custom-select-size .v-input__control .v-field .v-field__input {
+    padding: 0;
+    width: auto;
+    min-height: auto;
+}
+
+.custom-select-size .v-input__control .v-field .v-field__input .v-select__selection .v-select__selection-text {
+    font-size: 12px;
+    color: #0091ae;
+    line-height: 18px;
+    font-family: LexendDeca-SemiBold;
+}
+
+.custom-select-size .v-input__control .v-field .v-field__append-inner .v-icon {
+    opacity: 1;
+    margin-left: 0;
+    font-size: 18px;
+    color: #7c98b6;
+}
+
+.select-btn-size {
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    font-size: 14px;
+    color: #33475b;
+    border-radius: 0;
+    min-height: 40px;
+    padding: 9px 20px;
+    letter-spacing: 0.3px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-transform: capitalize;
+    justify-content: flex-start;
+    font-family: LexendDeca-Light;
+}
+
+.select-btn-size:hover {
+    background-color: #e5f5f8;
+}
+
+.select-btn-size p {
+    margin: 0;
+    width: 100%;
+    display: block;
+    font-size: 12px;
+    color: #516f90;
+    line-height: 18px;
+    margin: 5px 0 0 0;
+    font-family: LexendDeca-Light;
+}
+
+/* /// Custom Size Select Styling /// */
 
 /* /// File Detail Styling /// */
 </style>

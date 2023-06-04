@@ -154,11 +154,30 @@
                             </div>
                             <!-- /// Folder Details /// -->
                             <div class="foldr-details" :class="{ show: store.toggleFolderDetail }">
-                                <v-list-tile class="browse-folder" @click="store.toogleState('toggleFolderDetail')">
+                                <!-- <v-list-tile class="browse-folder" @click="store.toogleState('toggleFolderDetail')">
                                     Home
                                     <v-icon class="mdi mdi-chevron-right"></v-icon>
-                                </v-list-tile>
+                                </v-list-tile> -->
+                                <v-breadcrumbs class="bread-crumbs" :items="items">
+                                    <template v-slot:divider>
+                                        <v-icon icon="mdi-chevron-right"></v-icon>
+                                    </template>
+                                </v-breadcrumbs>
                                 <h5>Dashboard</h5>
+                                <div class="folder-list">
+                                    <div class="list-details" @click="store.toogleState('toggleFolderDetail')">
+                                        <v-icon class="mdi mdi-folder"></v-icon>
+                                        Dashboard
+                                    </div>
+                                    <div class="list-details">
+                                        <v-icon class="mdi mdi-folder"></v-icon>
+                                        Link 1
+                                    </div>
+                                    <div class="list-details">
+                                        <v-icon class="mdi mdi-folder"></v-icon>
+                                        Link 2
+                                    </div>
+                                </div>
                                 <h5 class="text-center mt-0 mb-4">No images are in this folder</h5>
                                 <p>
                                     Drop files in here to upload or
@@ -223,6 +242,24 @@ const props = defineProps(['editor']);
 const hideDiv = ref(false);
 const menu = ref(false);
 const selectedFolderId = ref(null);
+
+const items = [
+    {
+        title: 'Dashboard',
+        disabled: false,
+        href: '',
+    },
+    {
+        title: 'Link 1',
+        disabled: false,
+        href: '',
+    },
+    {
+        title: 'Link 2',
+        disabled: false,
+        href: '',
+    },
+];
 
 const headerActive = ref(false);
 function toggleClass() {
@@ -853,6 +890,34 @@ const onNodeClick = (node) => {
 }
 
 /* /// Tree Styling /// */
+
+/* /// Bread Crumbs Styling /// */
+.v-breadcrumbs.bread-crumbs {
+    padding: 0;
+}
+
+.bread-crumbs .v-breadcrumbs-item {
+    padding: 0;
+    font-size: 12px;
+    cursor: pointer;
+    color: #0091ae;
+    font-family: LexendDeca-SemiBold;
+}
+
+.bread-crumbs .v-breadcrumbs-item:hover {
+    text-decoration: underline;
+}
+
+.bread-crumbs .v-breadcrumbs-divider {
+    padding: 0 6px;
+}
+
+.bread-crumbs .v-breadcrumbs-divider .v-icon {
+    font-size: 16px;
+    color: #7c98b6;
+}
+
+/* /// Bread Crumbs Styling /// */
 
 /* /// v-navigation-drawer /// */
 </style>
