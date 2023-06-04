@@ -205,6 +205,7 @@ export default {
 
 .tree-row-item {
   display: flex;
+  overflow: hidden;
   align-items: center;
   position: relative;
   padding: 5px 10px;
@@ -252,17 +253,23 @@ export default {
   user-select: none;
 }
 
-.tree-row-item.selected~.animation-ul {
-  animation: fadeInOut 0.5s linear 1 forwards;
+.animation-ul {
+  position: relative;
 }
 
-@keyframes fadeInOut {
+.tree-row-item.selected~.animation-ul {
+  animation: fadeIn 0.2s linear 1 forwards;
+}
+
+@keyframes fadeIn {
   0% {
     opacity: 0;
+    top: -10px;
   }
 
   100% {
     opacity: 1;
+    top: 0;
   }
 }
 </style>
