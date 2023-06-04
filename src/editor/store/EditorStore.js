@@ -13,6 +13,7 @@ export const useEditorStore = defineStore('editor-store', {
         fontSizes, 
         fontFamilies,
         cropDefaultSizes,
+        activeCropSize: cropDefaultSizes[0],
         colors: colors,
         switches: switches,
         selectedFontFamily: null, 

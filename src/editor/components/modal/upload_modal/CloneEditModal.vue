@@ -55,10 +55,10 @@
                     <!-- // -->
                     <div class="size-wrapper" v-if="store.toggleCropImage">
                         <div class="d-flex align-center">
-                            <v-select class="custom-select" return-object item-title="name" item-value="name"
-                                :items="store.cropDefaultSizes" variant="solo">
-                                <template v-slot:item="{ item }">
-                                    <v-btn variant="text" class="select-btn">
+                            <v-select close-on-select class="custom-select" return-object item-title="name" item-value="name"
+                                :items="store.cropDefaultSizes" variant="solo" v-model="store.activeCropSize">
+                                <template v-slot:item="{ item, props: { onClick } }">
+                                    <v-btn @click="onClick" variant="text" class="select-btn">
                                         <v-icon> {{ item.value.iconName }}</v-icon>
                                         {{ item.value.name }}
                                     </v-btn>
@@ -102,6 +102,12 @@
 import { useEditorStore } from "@/editor/store/EditorStore";
 const store = useEditorStore();
 const props = defineProps(['editor']);
+
+const onUpdateValue = (value) => {
+  console.log('value', value)
+}
+
+console.log('store.activeCropSize', store.activeCropSize)
 
 </script>
 
