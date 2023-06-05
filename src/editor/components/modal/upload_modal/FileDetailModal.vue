@@ -67,7 +67,7 @@
                         <label class="label-text d-flex align-center mb-2">
                             Image Optimization
                             <v-icon class="mdi mdi-information ml-2" v-bind="props"></v-icon>
-                            <v-select close-on-select class="custom-select-size ml-2" return-object item-title="name"
+                            <!-- <v-select close-on-select class="custom-select-size ml-2" return-object item-title="name"
                                 item-value="name" :items="store.defaultSizeImages" variant="solo"
                                 v-model="store.activeSizeImages">
                                 <template v-slot:item="{ item, props: { onClick } }">
@@ -76,7 +76,32 @@
                                         <p> {{ item.value.sizeParagraph }}</p>
                                     </div>
                                 </template>
-                            </v-select>
+                            </v-select> -->
+                            <v-menu class="personalize-modal" v-model="menuDefaultSize" location="top">
+                                <template v-slot:activator="{ props }">
+                                    <div class="menu-box ml-2" v-bind="props">
+                                        <span class="btn-text">Default</span>
+                                        <v-icon class="mdi mdi-menu-down ma-0"></v-icon>
+                                    </div>
+                                </template>
+                                <v-card min-width="220" class="select-folder image-size-modal">
+                                    <div class="top-arrow"></div>
+                                    <v-list>
+                                        <div class="content-value">
+                                            <span title="High">High</span>
+                                            <p>Better image quality</p>
+                                        </div>
+                                        <div class="content-value">
+                                            <span title="Default">Default</span>
+                                            <p>Balanced for speed and quality</p>
+                                        </div>
+                                        <div class="content-value">
+                                            <span title="Low">Low</span>
+                                            <p>Faster load times</p>
+                                        </div>
+                                    </v-list>
+                                </v-card>
+                            </v-menu>
                         </label>
                     </template>
                     <v-list>
@@ -177,6 +202,7 @@ import Tree, { getNodeById } from "@/editor/tree";
 const store = useEditorStore()
 const props = defineProps(['editor']);
 const menuMove = ref(false);
+const menuDefaultSize = ref(false);
 const selectedFolderId = ref(null);
 
 const onNodeClick = (node) => {
@@ -628,39 +654,63 @@ button:hover {
     color: #7c98b6;
 }
 
-.select-btn-size {
-    width: 100%;
+.image-size-modal {
+    padding: 10px 0 !important;
+    margin: 0 0 15px -80px !important;
+}
+
+.personalize-modal .v-overlay__content .image-size-modal::before {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+    border-width: 1px;
+    border-style: solid;
+    border-right-color: rgb(203, 214, 226);
+    border-bottom-color: rgb(203, 214, 226);
+    border-image: initial;
+    clip-path: polygon(100% 100%, 0px 100%, 100% 0px);
+    border-top-left-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: inherit;
+    transform: rotate(45deg);
+    top: calc(100% - 26px);
+    left: 16px;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+}
+
+.image-size-modal .content-value {
     display: flex;
     cursor: pointer;
+    flex-direction: column;
+}
+
+.image-size-modal .content-value:hover {
+    background: #e5f5f8;
+}
+
+.image-size-modal .content-value span {
     font-size: 14px;
     color: #33475b;
-    border-radius: 0;
-    min-height: 40px;
     padding: 9px 20px;
-    letter-spacing: 0.3px;
-    flex-direction: column;
-    align-items: flex-start;
-    text-transform: capitalize;
-    justify-content: flex-start;
     font-family: LexendDeca-Light;
 }
 
-.select-btn-size:hover {
-    background-color: #e5f5f8;
-}
-
-.select-btn-size p {
-    margin: 0;
-    width: 100%;
-    display: block;
+.image-size-modal .content-value p {
     font-size: 12px;
     color: #516f90;
     line-height: 18px;
-    margin: 5px 0 0 0;
+    margin: -2px 0 0 0;
+    padding: 0 20px 9px;
     font-family: LexendDeca-Light;
 }
 
 /* /// Custom Size Select Styling /// */
+.move-select-folder {
+    height: auto;
+    transition: height 0.5s ease;
+}
 
 /* /// File Detail Styling /// */
 </style>
