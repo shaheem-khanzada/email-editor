@@ -202,6 +202,7 @@ const alignmentMenuBox = () => {
 
 .color-menu button:hover {
     border-color: #cbd6e2;
+    background-color: transparent;
 }
 
 .more-menu-wrapper .v-input .v-field .v-field__input input::placeholder {
